@@ -30,6 +30,16 @@ public class Pacijent extends Osoba {
 	public String toString() {
 		return this.getIme()+" "+this.getPrezime();
 	}
+	@Override
+	public Identifiable CreateFromString(String text) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public String WriteToString(Identifiable object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

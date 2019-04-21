@@ -1,8 +1,7 @@
 package model;
 
-public abstract class Osoba {
+public abstract class Osoba extends Identifiable{
 	
-	protected int id;
 	protected String ime;
 	protected String prezime;
 	protected String jmbg;
