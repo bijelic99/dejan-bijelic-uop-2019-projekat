@@ -53,7 +53,7 @@ public class DomZdravlja extends Identifiable{
 		return null;
 	}
 	@Override
-	public String WriteToString(Identifiable object) {
+	public String WriteToString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

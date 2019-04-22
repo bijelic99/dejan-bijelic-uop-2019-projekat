@@ -1,30 +1,30 @@
 package model;
 
 public class Pacijent extends Osoba {
-	private Lekar izabraniLekar;
-	private ZdravstvenaKnjizica zdravstvenaKnjizica;
+	private int izabraniLekarId;
+	private int zdravstvenaKnjizicaId;
 	public Pacijent(int id, String ime, String prezime, String jmbg, boolean pol, String adresa, String brojTelefona,
-			String username, String password, TipKorisnika uloga, Lekar izabraniLekar,
-			ZdravstvenaKnjizica zdravstvenaKnjizica) {
+			String username, String password, TipKorisnika uloga, int izabraniLekar,
+			int zdravstvenaKnjizica) {
 		super(id, ime, prezime, jmbg, pol, adresa, brojTelefona, username, password, uloga);
-		this.izabraniLekar = izabraniLekar;
-		this.zdravstvenaKnjizica = zdravstvenaKnjizica;
+		this.izabraniLekarId = izabraniLekar;
+		this.zdravstvenaKnjizicaId = zdravstvenaKnjizica;
 	}
 	public Pacijent() {
-		this(-5,"","","",true,"","","","", TipKorisnika.pacijent, null, null);
+		this(-5,"","","",true,"","","","", TipKorisnika.pacijent, -5, -5);
 		// TODO Auto-generated constructor stub
 	}
-	public Lekar getIzabraniLekar() {
-		return izabraniLekar;
+	public int getIzabraniLekarId() {
+		return izabraniLekarId;
 	}
-	public void setIzabraniLekar(Lekar izabraniLekar) {
-		this.izabraniLekar = izabraniLekar;
+	public void setIzabraniLekarId(int izabraniLekar) {
+		this.izabraniLekarId = izabraniLekar;
 	}
-	public ZdravstvenaKnjizica getZdravstvenaKnjizica() {
-		return zdravstvenaKnjizica;
+	public int getZdravstvenaKnjizicaId() {
+		return zdravstvenaKnjizicaId;
 	}
-	public void setZdravstvenaKnjizica(ZdravstvenaKnjizica zdravstvenaKnjizica) {
-		this.zdravstvenaKnjizica = zdravstvenaKnjizica;
+	public void setZdravstvenaKnjizicaId(int zdravstvenaKnjizica) {
+		this.zdravstvenaKnjizicaId = zdravstvenaKnjizica;
 	}
 	@Override
 	public String toString() {
@@ -36,7 +36,7 @@ public class Pacijent extends Osoba {
 		return null;
 	}
 	@Override
-	public String WriteToString(Identifiable object) {
+	public String WriteToString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

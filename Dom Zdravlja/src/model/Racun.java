@@ -18,7 +18,8 @@ public class Racun extends Identifiable{
 		this.placen = placen;
 	}
 
-	private Racun() {
+
+	public Racun() {
 		this(-5, -5, -5, false);
 
 	}
@@ -64,28 +65,34 @@ public class Racun extends Identifiable{
 	private double izracunajCenu() {
 		//nije idealno da ucitava preglede direktno iz fajla, treba doraditi
 		//u buducnosti odraditi da ucitava iz neke liste
-		
-		cena = ((Pregled)DAOInterface.ucitaj(this.getPregledId(),(new Pregled())::CreateFromString, "pregledi.txt")).getPacijent().getZdravstvenaKnjizica().getKategorija().getCenaPregleda();
+		var pregled = new Pregled();
+		pregled = ((Pregled)DAOInterface.ucitaj(this.getPregledId(),(pregled)::CreateFromString, DAOInterface.pregledPath));
+		var pacijent = new Pacijent();
+		pacijent = ((Pacijent)DAOInterface.ucitaj(pregled.getPacijentId(), pacijent::CreateFromString, DAOInterface.pacijentPath));
+		var knjizica = new ZdravstvenaKnjizica();
+		knjizica = ((ZdravstvenaKnjizica)DAOInterface.ucitaj(pacijent.getZdravstvenaKnjizicaId(), knjizica::CreateFromString, DAOInterface.zdravstvenaKnjizicaPath));
+		cena = knjizica.getKategorija().getCenaPregleda();
 		return cena;
 	}
 
 	@Override
 	public Identifiable CreateFromString(String text) {
-		var Racun = new Racun();
+		
 		var sc = new Scanner(text);
+		var racun = new Racun();
 		sc.useDelimiter("\\|");
-		Racun.setId(sc.nextInt());
-		Racun.setPregledId(sc.nextInt());
-		Racun.setCena(sc.nextDouble());
-		Racun.setPlacen(sc.nextBoolean());
+		racun.setId(sc.nextInt());
+		racun.setPregledId(sc.nextInt());
+		racun.setCena(sc.nextDouble());
+		racun.setPlacen(sc.nextBoolean());
 		sc.close();
-		return Racun;
+		return racun;
 	}
 
 	@Override
-	public String WriteToString(Identifiable object) {
+	public String WriteToString() {
 		var line = new StringJoiner("|");
-		line.add(((Racun)object).getId()+"").add(((Racun)object).getPregledId()+"").add(((Racun)object).getCena()+"").add(((Racun)object).isPlacen()+"");
+		line.add(this.getId()+"").add(this.getPregledId()+"").add(this.getCena()+"").add(this.isPlacen()+"");
 		return line.toString();
 	}
 	

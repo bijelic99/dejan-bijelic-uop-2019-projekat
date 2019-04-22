@@ -3,13 +3,13 @@ package model;
 public class MedicinskaSestra extends MedicinskiRadnik {
 
 	public MedicinskaSestra() {
-		this(-5, "", "", "", false, "", "", "", "", 0.00, null, null);
+		this(-5, "", "", "", false, "", "", "", "", 0.00, Sluzba.neodredjena, -5);
 		
 	}
 
 	public MedicinskaSestra(int id, String ime, String prezime, String jmbg, boolean pol, String adresa,
 			String brojTelefona, String username, String password, double plata, Sluzba sluzba,
-			DomZdravlja domZdravlja) {
+			int domZdravlja) {
 		super(id, ime, prezime, jmbg, pol, adresa, brojTelefona, username, password, TipKorisnika.medicinskaSestra,
 				plata, sluzba, domZdravlja);
 		
@@ -27,7 +27,7 @@ public class MedicinskaSestra extends MedicinskiRadnik {
 	}
 
 	@Override
-	public String WriteToString(Identifiable object) {
+	public String WriteToString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

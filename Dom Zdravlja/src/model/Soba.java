@@ -39,6 +39,7 @@ public class Soba extends Identifiable{
 	}
 	@Override
 	public Identifiable CreateFromString(String text) {
+		
 		var soba = new Soba();
 		var sc = new Scanner(text);
 		sc.useDelimiter("\\|");
@@ -49,9 +50,9 @@ public class Soba extends Identifiable{
 		return soba;
 	}
 	@Override
-	public String WriteToString(Identifiable object) {
+	public String WriteToString() {
 		var line = new StringJoiner("|");
-		line.add(((Soba)object).getId()+"").add(((Soba)object).getIdDomaZdravlja()+"").add(((Soba)object).getNaziv());
+		line.add(this.getId()+"").add(this.getIdDomaZdravlja()+"").add(this.getNaziv());
 		return line.toString();
 	}
 	

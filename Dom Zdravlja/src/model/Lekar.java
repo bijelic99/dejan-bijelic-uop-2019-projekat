@@ -3,13 +3,13 @@ package model;
 public class Lekar extends MedicinskiRadnik {
 	private String specijalizacija;
 	public Lekar() {
-		this(-5, "", "", "", false, "", "", "", "", 0.00, null, null,"nema");
+		this(-5, "", "", "", false, "", "", "", "", 0.00, Sluzba.neodredjena, -5,"nema");
 		
 	}
 
 	public Lekar(int id, String ime, String prezime, String jmbg, boolean pol, String adresa,
 			String brojTelefona, String username, String password, double plata, Sluzba sluzba,
-			DomZdravlja domZdravlja, String specijalizacija) {
+			int domZdravlja, String specijalizacija) {
 		super(id, ime, prezime, jmbg, pol, adresa, brojTelefona, username, password, TipKorisnika.lekar,
 				plata, sluzba, domZdravlja);
 		this.specijalizacija = specijalizacija;
@@ -35,7 +35,7 @@ public class Lekar extends MedicinskiRadnik {
 	}
 
 	@Override
-	public String WriteToString(Identifiable object) {
+	public String WriteToString() {
 		// TODO Auto-generated method stub
 		return null;
 	}

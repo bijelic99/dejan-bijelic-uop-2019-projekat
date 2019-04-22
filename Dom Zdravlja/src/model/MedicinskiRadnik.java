@@ -3,22 +3,22 @@ package model;
 public abstract class MedicinskiRadnik extends Osoba {
 	protected double plata;
 	protected Sluzba sluzba;
-	protected DomZdravlja domZdravlja;
+	protected int domZdravljaId;
 	
 	public MedicinskiRadnik(int id, String ime, String prezime, String jmbg, boolean pol, String adresa,
 			String brojTelefona, String username, String password, TipKorisnika uloga, double plata, Sluzba sluzba,
-			DomZdravlja domZdravlja) {
+			int domZdravlja) {
 		super(id, ime, prezime, jmbg, pol, adresa, brojTelefona, username, password, uloga);
 		this.plata = plata;
 		this.sluzba = sluzba;
-		this.domZdravlja = domZdravlja;
+		this.domZdravljaId = domZdravlja;
 	}
 
 	public MedicinskiRadnik() {
 		super();
 		this.plata = -5.00;
 		this.sluzba = Sluzba.neodredjena;
-		this.domZdravlja = null;
+		this.domZdravljaId = -5;
 	}
 
 	public double getPlata() {
@@ -37,12 +37,12 @@ public abstract class MedicinskiRadnik extends Osoba {
 		this.sluzba = sluzba;
 	}
 
-	public DomZdravlja getDomZdravlja() {
-		return domZdravlja;
+	public int getDomZdravljaId() {
+		return domZdravljaId;
 	}
 
-	public void setDomZdravlja(DomZdravlja domZdravlja) {
-		this.domZdravlja = domZdravlja;
+	public void setDomZdravljaId(int domZdravlja) {
+		this.domZdravljaId = domZdravlja;
 	}
 	
 	
