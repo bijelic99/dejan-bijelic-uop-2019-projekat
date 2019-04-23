@@ -1,6 +1,7 @@
 package localDataStore;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import dao.DAOInterface;
 import model.*;
@@ -31,6 +32,27 @@ public class DataStore {
 		
 		
 
+	}
+
+
+
+	public static HashSet<Sluzba> ucitajSluzbeDomaZdravlja(int id) {
+		// TODO Auto-generated method stub
+		//proveriti jel ucitano, ako nije traziti u dokumentu
+		return null;
+	}
+
+
+
+	public static ArrayList<Soba> ucitajSobeUDomuZdravlja(int id) {
+		// TODO Auto-generated method stub
+		//proveriti jel ucitano, ako nije traziti u dokumentu
+		return null;
+	}
+	
+	public static int generateId(ArrayList<Integer> keys) {
+		
+		return 0;
 	}
 
 }

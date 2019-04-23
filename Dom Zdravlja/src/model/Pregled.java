@@ -118,6 +118,7 @@ public class Pregled extends Identifiable{
 		var pregled = new Pregled();
 		var sc = new Scanner(text);
 		sc.useDelimiter("\\|");
+		
 		pregled.setId(sc.nextInt());
 		pregled.setPacijentId(sc.nextInt());
 		pregled.setLekarId(sc.nextInt());

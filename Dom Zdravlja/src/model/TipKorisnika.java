@@ -17,4 +17,13 @@ public enum TipKorisnika {
 		return text;
 	}
 	
+	public static TipKorisnika getRole(int ord) {
+		switch(ord) {
+		case 0: return TipKorisnika.medicinskaSestra;
+		case 1: return TipKorisnika.pacijent;
+		case 2: return TipKorisnika.lekar;
+		default: return TipKorisnika.pacijent;
+		}
+	}
+	
 }

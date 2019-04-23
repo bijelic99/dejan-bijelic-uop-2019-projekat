@@ -1,5 +1,8 @@
 package model;
 
+import java.util.Scanner;
+import java.util.StringJoiner;
+
 public class Pacijent extends Osoba {
 	private int izabraniLekarId;
 	private int zdravstvenaKnjizicaId;
@@ -32,13 +35,32 @@ public class Pacijent extends Osoba {
 	}
 	@Override
 	public Identifiable CreateFromString(String text) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		var sc = new Scanner(text);
+		var pacijent = new Pacijent();
+		sc.useDelimiter("\\|");
+		
+		pacijent.setId(sc.nextInt());
+		pacijent.setIme(sc.next());
+		pacijent.setPrezime(sc.next());
+		pacijent.setJmbg(sc.next());
+		pacijent.setPol(sc.nextBoolean());
+		pacijent.setAdresa(sc.next());
+		pacijent.setBrojTelefona(sc.next());
+		pacijent.setUsername(sc.next());
+		pacijent.setPassword(sc.next());
+		sc.nextInt();
+		pacijent.setIzabraniLekarId(sc.nextInt());
+		pacijent.setZdravstvenaKnjizicaId(sc.nextInt());
+		
+		sc.close();
+		return pacijent;
 	}
 	@Override
 	public String WriteToString() {
-		// TODO Auto-generated method stub
-		return null;
+		var line = new StringJoiner("|");
+		line.add(super.WriteToString()).add(this.getIzabraniLekarId()+"").add(this.getZdravstvenaKnjizicaId()+"");
+		return line.toString();
 	}
 	
 	

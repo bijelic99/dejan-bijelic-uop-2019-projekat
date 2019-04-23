@@ -1,5 +1,7 @@
 package model;
 
+import java.util.StringJoiner;
+
 public abstract class Osoba extends Identifiable{
 	
 	protected String ime;
@@ -107,8 +109,17 @@ public abstract class Osoba extends Identifiable{
 		return uloga;
 	}
 
-	
-	
+	 
+	@Override
+	public String WriteToString() {
+		var line = new StringJoiner("|");
+		line.add(this.getId()+"").add(this.getIme()).add(this.getPrezime());
+		line.add(this.getJmbg()).add(this.isPol()+"");
+		line.add(this.getAdresa()).add(this.getBrojTelefona());
+		line.add(this.getUsername()).add(this.getPassword()).add(this.getUloga().ordinal()+"");
+		
+		return line.toString();
+	}
 	
 	
 	

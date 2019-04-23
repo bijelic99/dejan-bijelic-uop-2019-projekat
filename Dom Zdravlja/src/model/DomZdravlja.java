@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Scanner;
 
 public class DomZdravlja extends Identifiable{
 	
@@ -49,8 +50,18 @@ public class DomZdravlja extends Identifiable{
 	}
 	@Override
 	public Identifiable CreateFromString(String text) {
-		// TODO Auto-generated method stub
-		return null;
+		var dom = new DomZdravlja();
+		var sc = new Scanner(text);
+		sc.useDelimiter("\\|");
+		
+		dom.setId(sc.nextInt());
+		dom.setNaziv(sc.next());
+		dom.setSluzbe(localDataStore.DataStore.ucitajSluzbeDomaZdravlja(dom.getId()));
+		dom.setSobe(localDataStore.DataStore.ucitajSobeUDomuZdravlja(dom.getId()));
+		
+		
+		sc.close();
+		return dom;
 	}
 	@Override
 	public String WriteToString() {

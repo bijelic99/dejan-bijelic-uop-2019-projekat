@@ -1,5 +1,7 @@
 package model;
 
+import java.util.StringJoiner;
+
 public abstract class MedicinskiRadnik extends Osoba {
 	protected double plata;
 	protected Sluzba sluzba;
@@ -45,6 +47,11 @@ public abstract class MedicinskiRadnik extends Osoba {
 		this.domZdravljaId = domZdravlja;
 	}
 	
-	
+	@Override
+	public String WriteToString() {
+		var line = new StringJoiner("|");
+		line.add(super.WriteToString()).add(this.getPlata()+"").add(this.getSluzba().ordinal()+"").add(this.getDomZdravljaId()+"");
+		return line.toString();
+	}
 
 }

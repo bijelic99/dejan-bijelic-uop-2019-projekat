@@ -1,8 +1,13 @@
 package model;
 
 public enum Sluzba {
-	sluzbaOpsteMedicine, sluzbaZdravstveneZastiteDece, stomatoloskaSluzba, sluzbaZdravstveneZastiteRadnika,
-	sluzbaZaPravneIEkonomskePoslove, sluzbaZaTehnickePoslove, neodredjena;
+	sluzbaOpsteMedicine,
+	sluzbaZdravstveneZastiteDece,
+	stomatoloskaSluzba,
+	sluzbaZdravstveneZastiteRadnika,
+	sluzbaZaPravneIEkonomskePoslove,
+	sluzbaZaTehnickePoslove,
+	neodredjena;
 
 	private String text;
 	private boolean dozvoljenoLekaru = true;
@@ -26,5 +31,19 @@ public enum Sluzba {
 
 	public boolean isDozvoljenoLekaru() {
 		return dozvoljenoLekaru;
+	}
+	
+	public static Sluzba getSluzba(int ord) {
+		switch(ord) {
+		case 0: return sluzbaOpsteMedicine;
+		case 1: return sluzbaZdravstveneZastiteDece;
+		case 2: return stomatoloskaSluzba;
+		case 3: return sluzbaZdravstveneZastiteRadnika;
+		case 4: return sluzbaZaPravneIEkonomskePoslove;
+		case 5: return sluzbaZaTehnickePoslove;
+		case 6: return neodredjena;
+		default: return neodredjena;
+		
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Scanner;
+
 public class MedicinskaSestra extends MedicinskiRadnik {
 
 	public MedicinskaSestra() {
@@ -22,14 +24,31 @@ public class MedicinskaSestra extends MedicinskiRadnik {
 
 	@Override
 	public Identifiable CreateFromString(String text) {
-		// TODO Auto-generated method stub
-		return null;
+		var sc = new Scanner(text);
+		var sestra = new MedicinskaSestra();
+		sc.useDelimiter("\\|");
+		
+		sestra.setId(sc.nextInt());
+		sestra.setIme(sc.next());
+		sestra.setPrezime(sc.next());
+		sestra.setJmbg(sc.next());
+		sestra.setPol(sc.nextBoolean());
+		sestra.setAdresa(sc.next());
+		sestra.setBrojTelefona(sc.next());
+		sestra.setUsername(sc.next());
+		sestra.setPassword(sc.next());
+		sc.nextInt();
+		sestra.setPlata(sc.nextDouble());
+		sestra.setSluzba(Sluzba.getSluzba(sc.nextInt()));
+		sestra.setDomZdravljaId(sc.nextInt());
+		
+		sc.close();
+		return sestra;
 	}
 
 	@Override
 	public String WriteToString() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.WriteToString();
 	}
 	
 

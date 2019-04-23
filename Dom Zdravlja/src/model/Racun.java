@@ -81,10 +81,12 @@ public class Racun extends Identifiable{
 		var sc = new Scanner(text);
 		var racun = new Racun();
 		sc.useDelimiter("\\|");
+		
 		racun.setId(sc.nextInt());
 		racun.setPregledId(sc.nextInt());
 		racun.setCena(sc.nextDouble());
 		racun.setPlacen(sc.nextBoolean());
+		
 		sc.close();
 		return racun;
 	}

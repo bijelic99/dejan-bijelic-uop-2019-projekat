@@ -43,9 +43,11 @@ public class Soba extends Identifiable{
 		var soba = new Soba();
 		var sc = new Scanner(text);
 		sc.useDelimiter("\\|");
+		
 		soba.setId(sc.nextInt());
 		soba.setIdDomaZdravlja(sc.nextInt());
 		soba.setNaziv(sc.next());
+		
 		sc.close();
 		return soba;
 	}
