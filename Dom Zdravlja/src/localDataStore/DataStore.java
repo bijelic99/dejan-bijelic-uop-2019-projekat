@@ -2,20 +2,31 @@ package localDataStore;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import dao.DAOInterface;
-import model.*;
+import model.DomZdravlja;
+import model.DomZdravljaSluzba;
+import model.Identifiable;
+import model.Lekar;
+import model.MedicinskaSestra;
+import model.Pacijent;
+import model.Pregled;
+import model.Racun;
+import model.Sluzba;
+import model.Soba;
+import model.ZdravstvenaKnjizica;
 
 public class DataStore {
-	public static ArrayList<Identifiable> sobe;
-	public static ArrayList<Identifiable> domoviZdravljaSluzbe;
-	public static ArrayList<Identifiable> domoviZdravlja;
-	public static ArrayList<Identifiable> zdravstveneKnjizice;
-	public static ArrayList<Identifiable> medicinskeSestre;
-	public static ArrayList<Identifiable> lekari;
-	public static ArrayList<Identifiable> pacijenti;
-	public static ArrayList<Identifiable> pregledi;
-	public static ArrayList<Identifiable> racuni;
+	public static ArrayList<Identifiable> sobe=null;
+	public static ArrayList<Identifiable> domoviZdravljaSluzbe=null;
+	public static ArrayList<Identifiable> domoviZdravlja=null;
+	public static ArrayList<Identifiable> zdravstveneKnjizice=null;
+	public static ArrayList<Identifiable> medicinskeSestre=null;
+	public static ArrayList<Identifiable> lekari=null;
+	public static ArrayList<Identifiable> pacijenti=null;
+	public static ArrayList<Identifiable> pregledi=null;
+	public static ArrayList<Identifiable> racuni=null;
 	
 	
 	
@@ -37,22 +48,21 @@ public class DataStore {
 
 
 	public static HashSet<Sluzba> ucitajSluzbeDomaZdravlja(int id) {
-		// TODO Auto-generated method stub
-		//proveriti jel ucitano, ako nije traziti u dokumentu
-		return null;
+		return new HashSet<Sluzba>(domoviZdravljaSluzbe.stream().filter(i->((DomZdravljaSluzba)i).getIdDomaZdravlja()==id).map(i->Sluzba.getSluzba(((DomZdravljaSluzba)i).getSluzbaOrd())).collect(Collectors.toSet()));
+		
 	}
 
 
 
-	public static ArrayList<Soba> ucitajSobeUDomuZdravlja(int id) {
-		// TODO Auto-generated method stub
-		//proveriti jel ucitano, ako nije traziti u dokumentu
-		return null;
+	public static ArrayList<Soba> ucitajSobeUDomuZdravlja(int id) { 
+		return new ArrayList<Soba>(sobe.stream().filter(i->((Soba)i).getIdDomaZdravlja()==id).map(i->((Soba)i)).collect(Collectors.toList()));
 	}
 	
-	public static int generateId(ArrayList<Integer> keys) {
+	public static int generateId(ArrayList<Identifiable> list) {
 		
-		return 0;
+		return (int)(list.stream().map(i->i.getId()).max((v1, v2)->(v1>v2)?v1:v2).get())+1;
 	}
+	
+	//napisati fje za dodavanje brisanje itd koje persistuju pomocu dao u fajl
 
 }
