@@ -1,0 +1,8 @@
+0|0|Prva
+1|0|Druga
+2|0|Treca
+3|0|Cetvrta
+4|1|PrvaA
+5|1|DrugaA
+6|1|TrecaA
+7|1|CetvrtaA

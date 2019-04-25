@@ -59,9 +59,10 @@ public class DataStore {
 	}
 
 	public static int generateId(HashMap<Integer, Identifiable> list) {
-
+		if(!list.isEmpty()) {
 		return (int) (list.entrySet().stream().map(i -> i.getValue().getId()).max((v1, v2) -> (v1 > v2) ? v1 : v2)
-				.get()) + 1;
+				.get()) + 1;}
+		else return 0;
 	}
 
 	// Nisam fan ovih f-ja
@@ -171,6 +172,35 @@ public class DataStore {
 		} else {
 			throw new Exception("Object not supported");
 		}
+	}
+
+	public static void srediSluzbe(int idDomaZdravlja, HashSet<Sluzba> sluzbe) {
+		sluzbe.stream().map(s-> new DomZdravljaSluzba(0, idDomaZdravlja, s.ordinal())).forEach(s->{
+			try {
+			domoviZdravljaSluzbe.entrySet().stream().filter(e->((DomZdravljaSluzba)e.getValue()).getIdDomaZdravlja() == idDomaZdravlja && ((DomZdravljaSluzba)e.getValue()).getSluzbaOrd() == s.getSluzbaOrd()).findFirst().get();
+			}
+			catch(Exception e) {
+				
+				try {
+					DataStore.dodaj(s);
+				} catch (Exception e1) {
+					//Really doesnt need to be here
+				}
+			}
+			});
+	}
+
+	public static void srediSobe(int idDomaZdravlja, ArrayList<Soba> sobe2) {
+		sobe2.stream().forEach(s->{
+			if(!sobe.containsKey(s.getId())){
+				try {
+					DataStore.dodaj(s);
+				} catch (Exception e) {
+					//Again really doesnt need to be here
+				}
+			}
+		});
+
 	}
 
 }

@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 public class MedicinskaSestraMain {
 
-	private JFrame frame;
+	private JFrame frmPocetniProzorSestra;
 
 	/**
 	 * Launch the application.
@@ -16,7 +16,7 @@ public class MedicinskaSestraMain {
 			public void run() {
 				try {
 					MedicinskaSestraMain window = new MedicinskaSestraMain();
-					window.frame.setVisible(true);
+					window.frmPocetniProzorSestra.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,9 +35,11 @@ public class MedicinskaSestraMain {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPocetniProzorSestra = new JFrame();
+		frmPocetniProzorSestra.setTitle("Pocetni Prozor Sestra");
+		frmPocetniProzorSestra.setBounds(100, 100, 450, 300);
+		frmPocetniProzorSestra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPocetniProzorSestra.setVisible(true);
 	}
 
 }

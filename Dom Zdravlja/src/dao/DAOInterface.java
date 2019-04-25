@@ -121,10 +121,11 @@ public interface DAOInterface {
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			String line ="";
-			while((line = reader.readLine()) != null) {
+			while((line = reader.readLine()) != null  ) {
+				if(!line.equals("")) {
 				line = line.replace("\n", "");
 				var object = createFromString.CreateFromString(line);
-				mapa.put(object.getId(), object);
+				mapa.put(object.getId(), object);}
 			}
 			
 			reader.close();

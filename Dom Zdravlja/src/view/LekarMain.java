@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 public class LekarMain {
 
-	private JFrame frame;
+	private JFrame frmPocetniProzorLekar;
 
 	/**
 	 * Launch the application.
@@ -16,7 +16,7 @@ public class LekarMain {
 			public void run() {
 				try {
 					LekarMain window = new LekarMain();
-					window.frame.setVisible(true);
+					window.frmPocetniProzorLekar.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,9 +35,11 @@ public class LekarMain {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPocetniProzorLekar = new JFrame();
+		frmPocetniProzorLekar.setTitle("Pocetni Prozor Lekar");
+		frmPocetniProzorLekar.setBounds(100, 100, 450, 300);
+		frmPocetniProzorLekar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPocetniProzorLekar.setVisible(true);
 	}
 
 }

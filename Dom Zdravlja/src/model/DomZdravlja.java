@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class DomZdravlja extends Identifiable{
 	
@@ -65,8 +66,11 @@ public class DomZdravlja extends Identifiable{
 	}
 	@Override
 	public String WriteToString() {
-		// TODO Auto-generated method stub
-		return null;
+		var line = new StringJoiner("|");
+		line.add(this.getId()+"").add(this.getNaziv());
+		localDataStore.DataStore.srediSluzbe(this.getId(), this.getSluzbe());
+		localDataStore.DataStore.srediSobe(this.getId(), this.getSobe());
+		return line.toString();
 	}
 	
 	

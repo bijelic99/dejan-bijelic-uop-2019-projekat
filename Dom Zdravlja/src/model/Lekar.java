@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Lekar extends MedicinskiRadnik {
 	private String specijalizacija;
@@ -57,8 +58,9 @@ public class Lekar extends MedicinskiRadnik {
 
 	@Override
 	public String WriteToString() {
-		// TODO Auto-generated method stub
-		return null;
+		StringJoiner line = new StringJoiner("|");
+		line.add(super.WriteToString()).add(this.getSpecijalizacija());
+		return line.toString();
 	}
 	
 }

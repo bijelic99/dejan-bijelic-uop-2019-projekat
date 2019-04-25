@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 
 public class PacijentMain {
 
-	private JFrame frame;
+	private JFrame frmPacijent;
 
 	/**
 	 * Launch the application.
@@ -16,7 +16,7 @@ public class PacijentMain {
 			public void run() {
 				try {
 					PacijentMain window = new PacijentMain();
-					window.frame.setVisible(true);
+					window.frmPacijent.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -35,9 +35,11 @@ public class PacijentMain {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPacijent = new JFrame();
+		frmPacijent.setTitle("Pacijent");
+		frmPacijent.setBounds(100, 100, 450, 300);
+		frmPacijent.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPacijent.setVisible(true);
 	}
 
 }

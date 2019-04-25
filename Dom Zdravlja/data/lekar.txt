@@ -1,0 +1,2 @@
+0|Doktor|Prvi|ddasdasadsad|true|Adresa|dsadasa|dr01|sifra|2|120000.0|0|0|Prva Specijalizacija
+1|Doktor|Drugi|ddasdasadsad|false|Adresa|dsadasa|dr02|sifra|2|125000.0|0|1|Druga Specijalizacija
