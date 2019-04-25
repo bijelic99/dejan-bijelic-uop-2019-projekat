@@ -1,15 +1,14 @@
 package view;
 
-import java.time.LocalDate;
-
-import dao.DAOInterface;
-import model.ZdravstvenaKnjizica;
+import controller.Router;
+import localDataStore.DataStore;
 
 public class Main {
 
 	public static void main(String[] args) {
-		var zk = new ZdravstvenaKnjizica(1, 0, LocalDate.now(), model.KategorijaOsiguranja.nema);
-		DAOInterface.dodaj(zk, DAOInterface.zdravstvenaKnjizicaPath);
+		DataStore.initialLoad();
+		Router.userRoute();
+		
 
 	}
 

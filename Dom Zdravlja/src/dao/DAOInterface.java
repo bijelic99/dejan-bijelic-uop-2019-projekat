@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
@@ -114,8 +114,8 @@ public interface DAOInterface {
 		return true;
 	}
 
-	public static ArrayList<Identifiable> ucitajSve(CreateFromStringInterface createFromString, String path) {
-		var lista = new ArrayList<Identifiable>();
+	public static HashMap<Integer,Identifiable> ucitajSve(CreateFromStringInterface createFromString, String path) {
+		var mapa = new HashMap<Integer,Identifiable>();
 		var file = new File(path);
 		BufferedReader reader = null;
 		try {
@@ -123,7 +123,8 @@ public interface DAOInterface {
 			String line ="";
 			while((line = reader.readLine()) != null) {
 				line = line.replace("\n", "");
-				lista.add(createFromString.CreateFromString(line));
+				var object = createFromString.CreateFromString(line);
+				mapa.put(object.getId(), object);
 			}
 			
 			reader.close();
@@ -131,7 +132,7 @@ public interface DAOInterface {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			
 		}
-		return lista;
+		return mapa;
 	}
 
 	public static Identifiable ucitaj(int id, CreateFromStringInterface createFromString, String path) {

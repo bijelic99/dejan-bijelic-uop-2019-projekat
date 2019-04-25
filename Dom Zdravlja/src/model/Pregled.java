@@ -57,7 +57,7 @@ public class Pregled extends Identifiable{
 		this.status = status;
 	}
 	public Pregled() {
-		this(-5,-5,-5,null,-5,"",StatusPregleda.zatrazen);
+		this(-5,-5,-5,LocalDateTime.now(),-5,"",StatusPregleda.zatrazen);
 	}
 	
 	
