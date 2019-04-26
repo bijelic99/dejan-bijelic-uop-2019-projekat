@@ -4,8 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
@@ -20,7 +23,7 @@ public class Login {
 
 	private JFrame frmLoginWindow;
 	private JTextField textField;
-	private JTextField textField_1;
+	private JPasswordField textField_1;
 	private JLabel lblPogresanLogin;
 
 	/**
@@ -65,7 +68,7 @@ public class Login {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Router.userRoute(textField.getText(), textField_1.getText());
+				Router.userRoute(textField.getText(), new String(textField_1.getPassword()));
 				frmLoginWindow.dispose();
 			}
 		});
@@ -93,7 +96,7 @@ public class Login {
 		JLabel lblPassword = new JLabel("Password: ");
 		panel.add(lblPassword);
 		
-		textField_1 = new JTextField();
+		textField_1 = new JPasswordField();
 		lblPassword.setLabelFor(textField_1);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
