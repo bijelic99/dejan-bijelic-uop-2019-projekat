@@ -1,17 +1,26 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
+
+import controller.Router;
+import localDataStore.DataStore;
 
 public class MedicinskaSestraMain {
 
 	private JFrame frmPocetniProzorSestra;
+	private JTabbedPane tabbedPane;
 
 	/**
 	 * Launch the application.
@@ -46,7 +55,7 @@ public class MedicinskaSestraMain {
 		frmPocetniProzorSestra.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPocetniProzorSestra.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPocetniProzorSestra.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -59,6 +68,11 @@ public class MedicinskaSestraMain {
 		mnAdminTools.add(mnPacijent);
 		
 		JMenuItem mntmDodaj = new JMenuItem("Dodaj");
+		mntmDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		mnPacijent.add(mntmDodaj);
 		
 		JMenuItem mntmIzmeni = new JMenuItem("Izmeni");
@@ -66,6 +80,16 @@ public class MedicinskaSestraMain {
 		
 		JMenuItem mntmObrisi = new JMenuItem("Obrisi");
 		mnPacijent.add(mntmObrisi);
+		
+		JMenuItem mntmPregledajSve = new JMenuItem("Pregledaj Sve");
+		mntmPregledajSve.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				tabbedPane.add("Svi Pacijenti", new TabbedPaneCloser(new PregledajSvePacijente(DataStore.pacijenti), "Svi Pacijenti"));
+				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+			}
+		});
+		mnPacijent.add(mntmPregledajSve);
 		
 		JMenu mnLekar = new JMenu("Lekar");
 		mnAdminTools.add(mnLekar);
@@ -79,6 +103,9 @@ public class MedicinskaSestraMain {
 		JMenuItem menuItem_2 = new JMenuItem("Obrisi");
 		mnLekar.add(menuItem_2);
 		
+		JMenuItem menuItem_12 = new JMenuItem("Pregledaj Sve");
+		mnLekar.add(menuItem_12);
+		
 		JMenu mnMedicinskaSestra = new JMenu("Medicinska Sestra");
 		mnAdminTools.add(mnMedicinskaSestra);
 		
@@ -90,6 +117,9 @@ public class MedicinskaSestraMain {
 		
 		JMenuItem menuItem_5 = new JMenuItem("Obrisi");
 		mnMedicinskaSestra.add(menuItem_5);
+		
+		JMenuItem menuItem_13 = new JMenuItem("Pregledaj Sve");
+		mnMedicinskaSestra.add(menuItem_13);
 		
 		JMenu mnDomoviZdravlja = new JMenu("Domovi Zdravlja");
 		mnAdminTools.add(mnDomoviZdravlja);
@@ -103,6 +133,9 @@ public class MedicinskaSestraMain {
 		JMenuItem menuItem_8 = new JMenuItem("Obrisi");
 		mnDomoviZdravlja.add(menuItem_8);
 		
+		JMenuItem menuItem_14 = new JMenuItem("Pregledaj Sve");
+		mnDomoviZdravlja.add(menuItem_14);
+		
 		JMenu mnPregledi = new JMenu("Pregledi");
 		mnAdminTools.add(mnPregledi);
 		
@@ -115,11 +148,41 @@ public class MedicinskaSestraMain {
 		JMenuItem menuItem_11 = new JMenuItem("Obrisi");
 		mnPregledi.add(menuItem_11);
 		
+		JMenuItem menuItem_15 = new JMenuItem("Pregledaj Sve");
+		mnPregledi.add(menuItem_15);
+		
 		JMenu mnPregledi_1 = new JMenu("Pregledi");
 		menuBar.add(mnPregledi_1);
 		
 		JMenuItem mntmZakazi = new JMenuItem("Zakazi");
 		mnPregledi_1.add(mntmZakazi);
+		
+		Component horizontalGlue = Box.createHorizontalGlue();
+		menuBar.add(horizontalGlue);
+		
+		JMenu mnOther = new JMenu("Other");
+		menuBar.add(mnOther);
+		
+		JMenuItem mntmOdjaviSe = new JMenuItem("Odjavi se");
+		mntmOdjaviSe.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frmPocetniProzorSestra.dispose();
+				Router.trenutniKorisnik=null;
+				Router.userRoute();
+			}
+		});
+		mnOther.add(mntmOdjaviSe);
+		
+		JMenuItem mntmIzadji = new JMenuItem("Izadji");
+		mntmIzadji.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				switch(JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite izaci", "Izlaz", JOptionPane.YES_NO_OPTION)){
+				case JOptionPane.YES_OPTION: System.exit(0);
+				default: break;
+				}
+			}
+		});
+		mnOther.add(mntmIzadji);
 		frmPocetniProzorSestra.setVisible(true);
 		
 		GreetingPanel gp = new GreetingPanel(controller.Router.trenutniKorisnik);
