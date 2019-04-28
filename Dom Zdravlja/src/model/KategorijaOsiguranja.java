@@ -14,7 +14,7 @@ public enum KategorijaOsiguranja {
 		nema.text="Nije Iskazana";
 		nema.cenaPregleda=0;
 	}
-	public String getText() {
+	public String toString() {
 		return text;
 	}
 	public double getCenaPregleda() {

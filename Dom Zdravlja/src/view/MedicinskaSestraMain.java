@@ -15,7 +15,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Router;
-import localDataStore.DataStore;
 
 public class MedicinskaSestraMain {
 
@@ -71,6 +70,9 @@ public class MedicinskaSestraMain {
 		mntmDodaj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				tabbedPane.add("Dodaj Pacijenta", new TabbedPaneCloser(new DodajPacijenta(), "Dodaj Pacijenta"));
+				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+				
 			}
 		});
 		mnPacijent.add(mntmDodaj);
@@ -85,7 +87,7 @@ public class MedicinskaSestraMain {
 		mntmPregledajSve.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				tabbedPane.add("Svi Pacijenti", new TabbedPaneCloser(new PregledajSvePacijente(DataStore.pacijenti), "Svi Pacijenti"));
+				tabbedPane.add("Svi Pacijenti", new TabbedPaneCloser(new PregledajSvePacijente(), "Svi Pacijenti"));
 				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
 			}
 		});

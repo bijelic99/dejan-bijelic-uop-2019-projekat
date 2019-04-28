@@ -9,20 +9,44 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import localDataStore.DataStore;
+import controller.DataStore;
 import model.Identifiable;
 import model.Lekar;
 import model.Pacijent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
 public class PregledajSvePacijente extends JPanel {
 	private JTable table;
+	private HashMap<Integer, Identifiable> mapaPacijenata;
 
 	/**
 	 * Create the panel.
 	 */
-	public PregledajSvePacijente(HashMap<Integer, Identifiable> mapaPacijenata) {
+	public PregledajSvePacijente() {
+		setBorder(new TitledBorder(null, "Pregled Pacijenata", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		mapaPacijenata = DataStore.pacijenti;
+		table = new JTable(ucitajTabelu());
+
+
+
+		add(new JScrollPane(table), BorderLayout.CENTER);
 		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				table.setModel(ucitajTabelu());
+			}
+		});
+		add(btnRefresh, BorderLayout.SOUTH);
+
+	}
+
+	private DefaultTableModel ucitajTabelu() {
+		mapaPacijenata = DataStore.pacijenti;
 		String[] redovi = { "Id", "Ime", "Prezime", "JMBG", "Pol", "Adresa", "Broj Telefona", "Username", "Izabrani Doktor"};
 		setLayout(new BorderLayout(0, 0));
 		var listaPacijenata = mapaPacijenata.entrySet().stream().map(es -> ((Pacijent) es.getValue()))
@@ -53,12 +77,8 @@ public class PregledajSvePacijente extends JPanel {
 					
 			return row;
 		}).forEach(o -> dtm.addRow(o));
-		table = new JTable(dtm);
-
-
-
-		add(new JScrollPane(table), BorderLayout.CENTER);
-
+		
+		return dtm;
 	}
 
 }

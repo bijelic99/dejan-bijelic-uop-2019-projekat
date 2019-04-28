@@ -5,8 +5,8 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+import controller.DataStore;
 import dao.DAOInterface;
-import localDataStore.DataStore;
 import model.DomZdravlja;
 import model.KategorijaOsiguranja;
 import model.Lekar;

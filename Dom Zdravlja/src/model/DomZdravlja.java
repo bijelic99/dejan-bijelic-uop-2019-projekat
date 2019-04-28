@@ -57,8 +57,8 @@ public class DomZdravlja extends Identifiable{
 		
 		dom.setId(sc.nextInt());
 		dom.setNaziv(sc.next());
-		dom.setSluzbe(localDataStore.DataStore.ucitajSluzbeDomaZdravlja(dom.getId()));
-		dom.setSobe(localDataStore.DataStore.ucitajSobeUDomuZdravlja(dom.getId()));
+		dom.setSluzbe(controller.DataStore.ucitajSluzbeDomaZdravlja(dom.getId()));
+		dom.setSobe(controller.DataStore.ucitajSobeUDomuZdravlja(dom.getId()));
 		
 		
 		sc.close();
@@ -68,8 +68,8 @@ public class DomZdravlja extends Identifiable{
 	public String WriteToString() {
 		var line = new StringJoiner("|");
 		line.add(this.getId()+"").add(this.getNaziv());
-		localDataStore.DataStore.srediSluzbe(this.getId(), this.getSluzbe());
-		localDataStore.DataStore.srediSobe(this.getId(), this.getSobe());
+		controller.DataStore.srediSluzbe(this.getId(), this.getSluzbe());
+		controller.DataStore.srediSobe(this.getId(), this.getSobe());
 		return line.toString();
 	}
 	
