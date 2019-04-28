@@ -226,7 +226,10 @@ public class DataStore {
 
 	public static void dodajPacijenta(Pacijent p, ZdravstvenaKnjizica zdravstvenaKnjizica) {
 		p.setId(generateId(pacijenti));
+		
 		zdravstvenaKnjizica.setIdKorisnika(p.getId());
+		zdravstvenaKnjizica.setId(generateId(zdravstveneKnjizice));
+		p.setZdravstvenaKnjizicaId(zdravstvenaKnjizica.getId());
 		try {
 			dodaj(p);
 			dodaj(zdravstvenaKnjizica);

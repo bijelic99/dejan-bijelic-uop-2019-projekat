@@ -164,9 +164,8 @@ public class IzmeniPacijenta extends JPanel {
 		try {
 			DataStore.izmeni(menjaSe);
 			JOptionPane.showMessageDialog(null, "Uspesno ste izmenili");
-			comboBox.setSelectedIndex(-1);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Greska pri izmeni");
+			JOptionPane.showMessageDialog(null, "Greska pri izmeni "+e.getMessage());
 		}
 
 	}
