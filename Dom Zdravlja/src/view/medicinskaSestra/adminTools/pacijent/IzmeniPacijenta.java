@@ -42,7 +42,9 @@ public class IzmeniPacijenta extends JPanel {
 	 * Create the panel.
 	 */
 	public IzmeniPacijenta() {
-		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Izmena Pacijenta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		setBorder(new TitledBorder(
+				new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)),
+				"Izmena Pacijenta", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
@@ -137,8 +139,10 @@ public class IzmeniPacijenta extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da hocete da izmenite", "Izmena",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null) == JOptionPane.YES_OPTION)
-					if(menjaSe != null)izmeniKorisnika();
-					else JOptionPane.showMessageDialog(null, "Bilo bi lepo kada bio izabran lekar");
+					if (menjaSe != null)
+						izmeniKorisnika();
+					else
+						JOptionPane.showMessageDialog(null, "Bilo bi lepo kada bio izabran lekar");
 			}
 		});
 		add(btnIzmeni, BorderLayout.SOUTH);

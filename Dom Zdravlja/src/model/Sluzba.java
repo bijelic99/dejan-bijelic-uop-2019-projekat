@@ -25,7 +25,7 @@ public enum Sluzba {
 
 	}
 
-	public String getText() {
+	public String toString() {
 		return text;
 	}
 

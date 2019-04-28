@@ -28,6 +28,8 @@ public class PregledajSvePacijente extends JPanel {
 	 */
 	public PregledajSvePacijente() {
 		setBorder(new TitledBorder(null, "Pregled Pacijenata", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setLayout(new BorderLayout(0, 0));
+		
 		mapaPacijenata = DataStore.pacijenti;
 		table = new JTable(ucitajTabelu());
 
@@ -48,7 +50,6 @@ public class PregledajSvePacijente extends JPanel {
 	private DefaultTableModel ucitajTabelu() {
 		mapaPacijenata = DataStore.pacijenti;
 		String[] redovi = { "Id", "Ime", "Prezime", "JMBG", "Pol", "Adresa", "Broj Telefona", "Username", "Izabrani Doktor"};
-		setLayout(new BorderLayout(0, 0));
 		var listaPacijenata = mapaPacijenata.entrySet().stream().map(es -> ((Pacijent) es.getValue()))
 				.sorted((p1, p2) -> {
 					if (p1.getId() > p2.getId())

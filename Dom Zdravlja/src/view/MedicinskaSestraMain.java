@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Router;
+import view.medicinskaSestra.adminTools.lekar.DodajLekara;
+import view.medicinskaSestra.adminTools.lekar.IzmeniLekara;
+import view.medicinskaSestra.adminTools.lekar.ObrisiLekara;
+import view.medicinskaSestra.adminTools.lekar.PregledajSveLekare;
 import view.medicinskaSestra.adminTools.pacijent.DodajPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.IzmeniPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.ObrisiPacijenta;
@@ -75,7 +79,7 @@ public class MedicinskaSestraMain {
 			public void actionPerformed(ActionEvent e) {
 				
 				tabbedPane.add("Dodaj Pacijenta", new TabbedPaneCloser(new DodajPacijenta(), "Dodaj Pacijenta"));
-				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dodaj Pacijenta"));
 				
 			}
 		});
@@ -85,7 +89,7 @@ public class MedicinskaSestraMain {
 		mntmIzmeni.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.add("Izmeni Pacijenta", new TabbedPaneCloser(new IzmeniPacijenta(), "Izmeni Pacijenta"));
-				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Pacijenta"));
 			}
 		});
 		mnPacijent.add(mntmIzmeni);
@@ -94,7 +98,7 @@ public class MedicinskaSestraMain {
 		mntmObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane.add("Obrisi Pacijenta", new TabbedPaneCloser(new ObrisiPacijenta(), "Obrisi Pacijenta"));
-				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Obrisi Pacijenta"));
 			}
 		});
 		mnPacijent.add(mntmObrisi);
@@ -104,7 +108,7 @@ public class MedicinskaSestraMain {
 			public void actionPerformed(ActionEvent e) {
 				
 				tabbedPane.add("Svi Pacijenti", new TabbedPaneCloser(new PregledajSvePacijente(), "Svi Pacijenti"));
-				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Svi Pacijenti"));
 			}
 		});
 		mnPacijent.add(mntmPregledajSve);
@@ -113,18 +117,38 @@ public class MedicinskaSestraMain {
 		mnAdminTools.add(mnLekar);
 		
 		JMenuItem menuItem = new JMenuItem("Dodaj");
+		menuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Dodaj Lekara", new TabbedPaneCloser(new DodajLekara(), "Dodaj Lekara"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dodaj Lekara"));
+			}
+		});
 		mnLekar.add(menuItem);
 		
 		JMenuItem menuItem_1 = new JMenuItem("Izmeni");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Izmeni Lekara", new TabbedPaneCloser(new IzmeniLekara(), "Izmeni Lekara"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Lekara"));
+				
+			}
+		});
 		mnLekar.add(menuItem_1);
 		
 		JMenuItem menuItem_2 = new JMenuItem("Obrisi");
+		menuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Obrisi Lekara", new TabbedPaneCloser(new ObrisiLekara(), "Obrisi Lekara"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Obrisi Lekara"));
+			}
+		});
 		mnLekar.add(menuItem_2);
 		
 		JMenuItem menuItem_12 = new JMenuItem("Pregledaj Sve");
 		menuItem_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				tabbedPane.add("Svi Lekari", new TabbedPaneCloser(new PregledajSveLekare(), "Svi Lekari"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Svi Lekari"));
 			}
 		});
 		mnLekar.add(menuItem_12);
