@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Router;
+import view.medicinskaSestra.adminTools.pacijent.DodajPacijenta;
+import view.medicinskaSestra.adminTools.pacijent.IzmeniPacijenta;
+import view.medicinskaSestra.adminTools.pacijent.ObrisiPacijenta;
+import view.medicinskaSestra.adminTools.pacijent.PregledajSvePacijente;
 
 public class MedicinskaSestraMain {
 
@@ -78,9 +82,21 @@ public class MedicinskaSestraMain {
 		mnPacijent.add(mntmDodaj);
 		
 		JMenuItem mntmIzmeni = new JMenuItem("Izmeni");
+		mntmIzmeni.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Izmeni Pacijenta", new TabbedPaneCloser(new IzmeniPacijenta(), "Izmeni Pacijenta"));
+				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+			}
+		});
 		mnPacijent.add(mntmIzmeni);
 		
 		JMenuItem mntmObrisi = new JMenuItem("Obrisi");
+		mntmObrisi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Obrisi Pacijenta", new TabbedPaneCloser(new ObrisiPacijenta(), "Obrisi Pacijenta"));
+				tabbedPane.setSelectedIndex(tabbedPane.getSelectedIndex()+1);
+			}
+		});
 		mnPacijent.add(mntmObrisi);
 		
 		JMenuItem mntmPregledajSve = new JMenuItem("Pregledaj Sve");
@@ -106,6 +122,11 @@ public class MedicinskaSestraMain {
 		mnLekar.add(menuItem_2);
 		
 		JMenuItem menuItem_12 = new JMenuItem("Pregledaj Sve");
+		menuItem_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		mnLekar.add(menuItem_12);
 		
 		JMenu mnMedicinskaSestra = new JMenu("Medicinska Sestra");

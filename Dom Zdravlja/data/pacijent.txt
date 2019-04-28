@@ -1,6 +1,6 @@
 0|Dejan|Bijelic|MojJmbg|true|NekaAdresa|060555333|bijelic99|sifraSifra|1|0|0
 1|Dragan|Bijelic|NjegovJmbg|true|NekaAdresa|060555333|bijelic03|sifraSifra2|1|0|1
-2|Radoslav|Petrovic|115445454|false|NekaAdresa|06021105445|rasa|rasaradoslav|1|1|2
+2|Radoslav|Petrovic|115445454|true|NekaAdresa|06021105445|rasa|rasaradoslav|1|0|2
 3|Ime|Prezime|dsadaad|false|daasdsa|dadadd|user342|sifra|1|0|-5
 4|Ime|Prezime|dsadaad|false|daasdsa|dadadd|user3423|sifra|1|0|-5
-5|Ime|Prezime|dsadaad|true|daasdsa|dadadd|user34234|sifra|1|0|-5
+5|Imes|Prezimes|dsadaad|false|daasdsa|dadadd|user34234|sifra|1|0|-5

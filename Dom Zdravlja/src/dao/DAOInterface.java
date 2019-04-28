@@ -75,7 +75,8 @@ public interface DAOInterface {
 
 			reader.close();
 			writer.close();
-			temp.renameTo(original);
+			original.delete();
+			temp.renameTo(new File(path));
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
@@ -104,7 +105,8 @@ public interface DAOInterface {
 			}
 			reader.close();
 			writer.close();
-			temp.renameTo(original);
+			original.delete();
+			temp.renameTo(new File(path));
 
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());

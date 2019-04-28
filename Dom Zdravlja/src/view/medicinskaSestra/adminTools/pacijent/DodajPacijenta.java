@@ -1,4 +1,4 @@
-package view;
+package view.medicinskaSestra.adminTools.pacijent;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -31,7 +31,7 @@ public class DodajPacijenta extends JPanel {
 	private JTextField textField_5;
 	private JComboBox<Lekar> comboBox;
 	private JRadioButton rdbtnZenski;
-	JRadioButton rdbtnMuski;
+	private JRadioButton rdbtnMuski;
 	private JPasswordField passwordField;
 	private NovaKnjizica nk = null;
 
@@ -69,6 +69,7 @@ public class DodajPacijenta extends JPanel {
 							p.setIzabraniLekarId(((Lekar)(comboBox.getSelectedItem())).getId());
 							
 							DataStore.dodajPacijenta(p,nk.getZdravstvenaKnjizica());
+							JOptionPane.showMessageDialog(null, "Uspesno ste dodali Korisnika");
 						}
 					}
 				}
