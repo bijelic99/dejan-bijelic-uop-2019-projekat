@@ -31,8 +31,8 @@ public class Lekar extends MedicinskiRadnik {
 		return "Dr. "+this.getIme()+" "+this.getPrezime();
 	}
 
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		var sc = new Scanner(text);
 		var lekar = new Lekar();
 		sc.useDelimiter("\\|");

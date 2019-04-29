@@ -1,4 +1,6 @@
-package model;
+package dao;
+
+import model.Identifiable;
 
 @FunctionalInterface
 public interface CreateFromStringInterface {

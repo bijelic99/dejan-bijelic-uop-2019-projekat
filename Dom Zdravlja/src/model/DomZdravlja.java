@@ -49,8 +49,8 @@ public class DomZdravlja extends Identifiable{
 	public String toString() {
 		return this.getNaziv();
 	}
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		var dom = new DomZdravlja();
 		var sc = new Scanner(text);
 		sc.useDelimiter("\\|");

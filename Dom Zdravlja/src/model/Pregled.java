@@ -113,8 +113,8 @@ public class Pregled extends Identifiable{
 	private LocalDateTime izracunajVremeKrajaPregleda(LocalDateTime vremePocetka) {
 		return vremePocetka.plusMinutes(15);
 	}
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		var pregled = new Pregled();
 		var sc = new Scanner(text);
 		sc.useDelimiter("\\|");
@@ -134,7 +134,7 @@ public class Pregled extends Identifiable{
 		default: pregled.setStatus(StatusPregleda.zatrazen);break;
 		}
 		sc.close();
-		return this;
+		return pregled;
 	}
 	@Override
 	public String WriteToString() {

@@ -1,4 +1,4 @@
-package model;
+package dao;
 
 @FunctionalInterface
 public interface WriteToStringInterface {

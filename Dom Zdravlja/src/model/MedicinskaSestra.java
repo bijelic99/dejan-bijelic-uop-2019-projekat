@@ -22,8 +22,8 @@ public class MedicinskaSestra extends MedicinskiRadnik {
 		return "Medicinska Sestra "+this.getIme()+" "+this.getPrezime();
 	}
 
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		var sc = new Scanner(text);
 		var sestra = new MedicinskaSestra();
 		sc.useDelimiter("\\|");

@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
-import model.CreateFromStringInterface;
 import model.Identifiable;
 
 public interface DAOInterface {

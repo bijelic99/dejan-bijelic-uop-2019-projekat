@@ -33,8 +33,8 @@ public class DomZdravljaSluzba extends Identifiable {
 		this.sluzbaOrd = sluzbaOrd;
 	}
 
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		var dzs = new DomZdravljaSluzba();
 		var sc = new Scanner(text);
 		sc.useDelimiter("\\|");

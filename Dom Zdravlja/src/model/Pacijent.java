@@ -33,8 +33,8 @@ public class Pacijent extends Osoba {
 	public String toString() {
 		return this.getIme()+" "+this.getPrezime();
 	}
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		
 		var sc = new Scanner(text);
 		var pacijent = new Pacijent();

@@ -19,6 +19,10 @@ import view.medicinskaSestra.adminTools.lekar.DodajLekara;
 import view.medicinskaSestra.adminTools.lekar.IzmeniLekara;
 import view.medicinskaSestra.adminTools.lekar.ObrisiLekara;
 import view.medicinskaSestra.adminTools.lekar.PregledajSveLekare;
+import view.medicinskaSestra.adminTools.medicinskaSestra.DodajMedicinskuSestru;
+import view.medicinskaSestra.adminTools.medicinskaSestra.IzmeniMedicinskuSestru;
+import view.medicinskaSestra.adminTools.medicinskaSestra.ObrisiMedicinskuSestru;
+import view.medicinskaSestra.adminTools.medicinskaSestra.PregledajSveMedicinskeSestre;
 import view.medicinskaSestra.adminTools.pacijent.DodajPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.IzmeniPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.ObrisiPacijenta;
@@ -157,15 +161,39 @@ public class MedicinskaSestraMain {
 		mnAdminTools.add(mnMedicinskaSestra);
 		
 		JMenuItem menuItem_3 = new JMenuItem("Dodaj");
+		menuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Nova Medicinska Sestra", new TabbedPaneCloser(new DodajMedicinskuSestru(), "Nova Medicinska Sestra"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Nova Medicinska Sestra"));
+			}
+		});
 		mnMedicinskaSestra.add(menuItem_3);
 		
 		JMenuItem menuItem_4 = new JMenuItem("Izmeni");
+		menuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Izmeni Medicinsku Sestru", new TabbedPaneCloser(new IzmeniMedicinskuSestru(), "Izmeni Medicinsku Sestru"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Medicinsku Sestru"));
+			}
+		});
 		mnMedicinskaSestra.add(menuItem_4);
 		
 		JMenuItem menuItem_5 = new JMenuItem("Obrisi");
+		menuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Obrisi Medicinsku Sestru", new TabbedPaneCloser(new ObrisiMedicinskuSestru(), "Obrisi Medicinsku Sestru"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Obrisi Medicinsku Sestru"));
+			}
+		});
 		mnMedicinskaSestra.add(menuItem_5);
 		
 		JMenuItem menuItem_13 = new JMenuItem("Pregledaj Sve");
+		menuItem_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Sve Medicinske Sestre", new TabbedPaneCloser(new PregledajSveMedicinskeSestre(), "Sve Medicinske Sestre"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Sve Medicinske Sestre"));
+			}
+		});
 		mnMedicinskaSestra.add(menuItem_13);
 		
 		JMenu mnDomoviZdravlja = new JMenu("Domovi Zdravlja");

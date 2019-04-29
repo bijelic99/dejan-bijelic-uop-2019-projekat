@@ -38,6 +38,8 @@ public class ObrisiLekara extends JPanel {
 							DataStore.obrisi(((Identifiable)comboBox.getSelectedItem()));
 							JOptionPane.showMessageDialog(null, "Uspesno Obrisano");
 							comboBox.setSelectedIndex(-1);
+							comboBox.setModel(new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
+							comboBox.setSelectedIndex(-1);
 						} catch (Exception e1) {
 							JOptionPane.showMessageDialog(null, "Greska, nije obrisano!!!");
 						}

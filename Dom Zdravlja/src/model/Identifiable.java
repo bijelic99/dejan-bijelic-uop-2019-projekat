@@ -1,6 +1,8 @@
 package model;
 
-public abstract class Identifiable implements CreateFromStringInterface, WriteToStringInterface{
+import dao.WriteToStringInterface;
+
+public abstract class Identifiable implements WriteToStringInterface{
 	protected int id;
 
 	public Identifiable(int id) {

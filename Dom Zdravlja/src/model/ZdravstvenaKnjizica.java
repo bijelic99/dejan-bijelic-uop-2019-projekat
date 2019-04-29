@@ -48,8 +48,8 @@ public class ZdravstvenaKnjizica extends Identifiable{
 	public String toString() {
 		return "ZdravstvenaKnjizica br.: "+this.getId()+", Datum Isteka: "+this.getDatumIsteka()+", Kategorija: "+this.getKategorija().toString();
 	}
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		Scanner sc = new Scanner(text);
 		sc.useDelimiter("\\|");
 		var zdravstvenaKnjizica = new ZdravstvenaKnjizica();

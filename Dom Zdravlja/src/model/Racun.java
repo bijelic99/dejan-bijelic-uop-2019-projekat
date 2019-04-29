@@ -66,17 +66,17 @@ public class Racun extends Identifiable{
 		//nije idealno da ucitava preglede direktno iz fajla, treba doraditi
 		//u buducnosti odraditi da ucitava iz neke liste
 		var pregled = new Pregled();
-		pregled = ((Pregled)DAOInterface.ucitaj(this.getPregledId(),(pregled)::CreateFromString, DAOInterface.pregledPath));
+		pregled = ((Pregled)DAOInterface.ucitaj(this.getPregledId(),Pregled::CreateFromString, DAOInterface.pregledPath));
 		var pacijent = new Pacijent();
-		pacijent = ((Pacijent)DAOInterface.ucitaj(pregled.getPacijentId(), pacijent::CreateFromString, DAOInterface.pacijentPath));
+		pacijent = ((Pacijent)DAOInterface.ucitaj(pregled.getPacijentId(), Pacijent	::CreateFromString, DAOInterface.pacijentPath));
 		var knjizica = new ZdravstvenaKnjizica();
-		knjizica = ((ZdravstvenaKnjizica)DAOInterface.ucitaj(pacijent.getZdravstvenaKnjizicaId(), knjizica::CreateFromString, DAOInterface.zdravstvenaKnjizicaPath));
+		knjizica = ((ZdravstvenaKnjizica)DAOInterface.ucitaj(pacijent.getZdravstvenaKnjizicaId(), ZdravstvenaKnjizica::CreateFromString, DAOInterface.zdravstvenaKnjizicaPath));
 		cena = knjizica.getKategorija().getCenaPregleda();
 		return cena;
 	}
 
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		
 		var sc = new Scanner(text);
 		var racun = new Racun();

@@ -37,8 +37,8 @@ public class Soba extends Identifiable{
 	public String toString() {
 		return this.getNaziv();
 	}
-	@Override
-	public Identifiable CreateFromString(String text) {
+	
+	public static Identifiable CreateFromString(String text) {
 		
 		var soba = new Soba();
 		var sc = new Scanner(text);

@@ -20,18 +20,18 @@ public class DataStore {
 	public static HashMap<Integer, Identifiable> racuni = null;
 
 	public static void initialLoad() {
-		sobe = DAOInterface.ucitajSve((new Soba())::CreateFromString, DAOInterface.sobaPath);
-		domoviZdravljaSluzbe = DAOInterface.ucitajSve((new DomZdravljaSluzba())::CreateFromString,
+		sobe = DAOInterface.ucitajSve(Soba::CreateFromString, DAOInterface.sobaPath);
+		domoviZdravljaSluzbe = DAOInterface.ucitajSve(DomZdravljaSluzba::CreateFromString,
 				DAOInterface.domZdravljaSluzbaPath);
-		domoviZdravlja = DAOInterface.ucitajSve((new DomZdravlja())::CreateFromString, DAOInterface.domZdravljaPath);
-		zdravstveneKnjizice = DAOInterface.ucitajSve((new ZdravstvenaKnjizica())::CreateFromString,
+		domoviZdravlja = DAOInterface.ucitajSve(DomZdravlja::CreateFromString, DAOInterface.domZdravljaPath);
+		zdravstveneKnjizice = DAOInterface.ucitajSve(ZdravstvenaKnjizica::CreateFromString,
 				DAOInterface.zdravstvenaKnjizicaPath);
-		medicinskeSestre = DAOInterface.ucitajSve((new MedicinskaSestra())::CreateFromString,
+		medicinskeSestre = DAOInterface.ucitajSve(MedicinskaSestra::CreateFromString,
 				DAOInterface.medicinskaSestraPath);
-		lekari = DAOInterface.ucitajSve((new Lekar())::CreateFromString, DAOInterface.lekarPath);
-		pacijenti = DAOInterface.ucitajSve((new Pacijent())::CreateFromString, DAOInterface.pacijentPath);
-		pregledi = DAOInterface.ucitajSve((new Pregled())::CreateFromString, DAOInterface.pregledPath);
-		racuni = DAOInterface.ucitajSve((new Racun())::CreateFromString, DAOInterface.pregledPath);
+		lekari = DAOInterface.ucitajSve(Lekar::CreateFromString, DAOInterface.lekarPath);
+		pacijenti = DAOInterface.ucitajSve(Pacijent::CreateFromString, DAOInterface.pacijentPath);
+		pregledi = DAOInterface.ucitajSve(Pregled::CreateFromString, DAOInterface.pregledPath);
+		racuni = DAOInterface.ucitajSve(Racun::CreateFromString, DAOInterface.pregledPath);
 
 	}
 
