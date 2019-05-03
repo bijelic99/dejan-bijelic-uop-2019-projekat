@@ -123,8 +123,8 @@ public interface DAOInterface {
 			reader = new BufferedReader(new FileReader(file));
 			String line ="";
 			while((line = reader.readLine()) != null  ) {
-				if(!line.equals("")) {
 				line = line.replace("\n", "");
+				if(!line.equals("")) {
 				var object = createFromString.CreateFromString(line);
 				mapa.put(object.getId(), object);}
 			}

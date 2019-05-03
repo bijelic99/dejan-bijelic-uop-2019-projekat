@@ -1,5 +1,7 @@
 package controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,7 +33,7 @@ public class DataStore {
 		lekari = DAOInterface.ucitajSve(Lekar::CreateFromString, DAOInterface.lekarPath);
 		pacijenti = DAOInterface.ucitajSve(Pacijent::CreateFromString, DAOInterface.pacijentPath);
 		pregledi = DAOInterface.ucitajSve(Pregled::CreateFromString, DAOInterface.pregledPath);
-		racuni = DAOInterface.ucitajSve(Racun::CreateFromString, DAOInterface.pregledPath);
+		racuni = DAOInterface.ucitajSve(Racun::CreateFromString, DAOInterface.racunPath);
 
 	}
 
@@ -50,7 +52,7 @@ public class DataStore {
 
 	public static int generateId(HashMap<Integer, Identifiable> list) {
 		if (!list.isEmpty()) {
-			return list.values().stream().map(i-> i.getId()).max(Integer::compare).get()+1;
+			return list.values().stream().map(i -> i.getId()).max(Integer::compare).get() + 1;
 		} else
 			return 0;
 	}
@@ -198,7 +200,7 @@ public class DataStore {
 	public static boolean checkIfUsernameAvailable(String username) {
 		var isGood = true;
 		try {
-			
+
 			pacijenti.values().stream().filter(i -> ((Osoba) i).getUsername().equals(username)).findAny().get();
 			isGood = false;
 
@@ -209,24 +211,26 @@ public class DataStore {
 
 			medicinskeSestre.values().stream().filter(i -> ((Osoba) i).getUsername().equals(username)).findAny().get();
 			isGood = false;
-			
+
 		} catch (Exception e) {
-			if(isGood != false) isGood = true;
+			if (isGood != false)
+				isGood = true;
 		}
 		try {
-			
+
 			lekari.values().stream().filter(i -> ((Osoba) i).getUsername().equals(username)).findAny().get();
 			isGood = false;
-			
+
 		} catch (Exception e) {
-			if(isGood != false) isGood = true;
+			if (isGood != false)
+				isGood = true;
 		}
 		return isGood;
 	}
 
 	public static void dodajPacijenta(Pacijent p, ZdravstvenaKnjizica zdravstvenaKnjizica) {
 		p.setId(generateId(pacijenti));
-		
+
 		zdravstvenaKnjizica.setIdKorisnika(p.getId());
 		zdravstvenaKnjizica.setId(generateId(zdravstveneKnjizice));
 		p.setZdravstvenaKnjizicaId(zdravstvenaKnjizica.getId());
@@ -237,8 +241,27 @@ public class DataStore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+	}
+
+	public static boolean proveriIspravnostIDostupnostTermina(String termin, Lekar lekar) {
+		try {
+			var vremePocetka = LocalDateTime.parse(termin, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
+			if(vremePocetka.isAfter(LocalDateTime.now()) || vremePocetka.equals(LocalDateTime.now())) {
+			var vremeKraja = vremePocetka.plusMinutes(15);
+			if (pregledi.values().stream().filter(i -> ((Pregled) i).getLekarId() == lekar.getId())
+					.map(i -> (Pregled) i).filter(p -> {
+						return !((vremeKraja.isBefore(p.getTermin().getVremePocetka())
+								|| vremeKraja.isEqual(p.getTermin().getVremePocetka()))
+								|| (vremePocetka.isAfter(p.getTermin().getVremeKraja())
+										|| vremePocetka.isEqual(p.getTermin().getVremeKraja())));
+					}).count() != 0)
+				return false;}
+			else return false;
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
 	}
 
 }

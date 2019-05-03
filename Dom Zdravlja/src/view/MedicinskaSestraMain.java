@@ -27,6 +27,12 @@ import view.medicinskaSestra.adminTools.pacijent.DodajPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.IzmeniPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.ObrisiPacijenta;
 import view.medicinskaSestra.adminTools.pacijent.PregledajSvePacijente;
+import view.medicinskaSestra.adminTools.pregled.DodajPregled;
+import view.medicinskaSestra.adminTools.pregled.IzmeniPregled;
+import view.medicinskaSestra.adminTools.pregled.ObrisiPregled;
+import view.medicinskaSestra.adminTools.pregled.PregledajSvePreglede;
+import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.IzmeniZdravstvenuKnjizicu;
+import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.PregledajSveZdravstveneKnjizice;
 
 public class MedicinskaSestraMain {
 
@@ -196,6 +202,66 @@ public class MedicinskaSestraMain {
 		});
 		mnMedicinskaSestra.add(menuItem_13);
 		
+		JMenu mnZdravstveneKnjizice = new JMenu("Zdravstvene Knjizice");
+		mnAdminTools.add(mnZdravstveneKnjizice);
+		
+		JMenuItem menuItem_17 = new JMenuItem("Izmeni");
+		menuItem_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Izmeni Zdravstvenu Knjizicu", new TabbedPaneCloser(new IzmeniZdravstvenuKnjizicu(), "Izmeni Zdravstvenu Knjizicu"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Zdravstvenu Knjizicu"));
+			}
+		});
+		mnZdravstveneKnjizice.add(menuItem_17);
+		
+		JMenuItem menuItem_19 = new JMenuItem("Pregledaj Sve");
+		menuItem_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Pregledaj Zdravstvene Knjizice", new TabbedPaneCloser(new PregledajSveZdravstveneKnjizice(), "Pregledaj Zdravstvene Knjizice"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Zdravstvene Knjizice"));
+			}
+		});
+		mnZdravstveneKnjizice.add(menuItem_19);
+		
+		JMenu mnPregledi = new JMenu("Pregledi");
+		mnAdminTools.add(mnPregledi);
+		
+		JMenuItem menuItem_9 = new JMenuItem("Dodaj");
+		menuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Dodaj Pregled", new TabbedPaneCloser(new DodajPregled(), "Dodaj Pregled"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dodaj Pregled"));
+			}
+		});
+		mnPregledi.add(menuItem_9);
+		
+		JMenuItem menuItem_10 = new JMenuItem("Izmeni");
+		menuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Izmeni Pregled", new TabbedPaneCloser(new IzmeniPregled(), "Izmeni Pregled"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Pregled"));
+			}
+		});
+		mnPregledi.add(menuItem_10);
+		
+		JMenuItem menuItem_11 = new JMenuItem("Obrisi");
+		menuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Obrisi Pregled", new TabbedPaneCloser(new ObrisiPregled(), "Obrisi Pregled"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Obrisi Pregled"));
+			}
+		});
+		mnPregledi.add(menuItem_11);
+		
+		JMenuItem menuItem_15 = new JMenuItem("Pregledaj Sve");
+		menuItem_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Pregledaj Preglede", new TabbedPaneCloser(new PregledajSvePreglede(), "Pregledaj Preglede"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Preglede"));
+			}
+		});
+		mnPregledi.add(menuItem_15);
+		
 		JMenu mnDomoviZdravlja = new JMenu("Domovi Zdravlja");
 		mnAdminTools.add(mnDomoviZdravlja);
 		
@@ -210,21 +276,6 @@ public class MedicinskaSestraMain {
 		
 		JMenuItem menuItem_14 = new JMenuItem("Pregledaj Sve");
 		mnDomoviZdravlja.add(menuItem_14);
-		
-		JMenu mnPregledi = new JMenu("Pregledi");
-		mnAdminTools.add(mnPregledi);
-		
-		JMenuItem menuItem_9 = new JMenuItem("Dodaj");
-		mnPregledi.add(menuItem_9);
-		
-		JMenuItem menuItem_10 = new JMenuItem("Izmeni");
-		mnPregledi.add(menuItem_10);
-		
-		JMenuItem menuItem_11 = new JMenuItem("Obrisi");
-		mnPregledi.add(menuItem_11);
-		
-		JMenuItem menuItem_15 = new JMenuItem("Pregledaj Sve");
-		mnPregledi.add(menuItem_15);
 		
 		JMenu mnPregledi_1 = new JMenu("Pregledi");
 		menuBar.add(mnPregledi_1);

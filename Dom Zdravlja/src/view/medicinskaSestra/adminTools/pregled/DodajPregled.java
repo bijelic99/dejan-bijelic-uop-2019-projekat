@@ -1,0 +1,200 @@
+package view.medicinskaSestra.adminTools.pregled;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+
+import controller.DataStore;
+import model.Lekar;
+import model.Pacijent;
+import model.Pregled;
+import model.Soba;
+import model.StatusPregleda;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+@SuppressWarnings("serial")
+public class DodajPregled extends JPanel {
+	private JComboBox<Soba> comboBox_2;
+	private JComboBox<StatusPregleda> comboBox_4;
+	private JComboBox<Lekar> comboBox_1;
+	private JComboBox<Pacijent> comboBox;
+	private JTextArea textArea;
+	private JTextField textField;
+	private JButton btnProveri;
+
+	/**
+	 * Create the panel.
+	 */
+	public DodajPregled() {
+		setBorder(new TitledBorder(null, "Dodaj Pregled", TitledBorder.LEADING, TitledBorder.TOP, null,
+				new Color(0, 0, 0)));
+		setLayout(new BorderLayout(0, 0));
+
+		JButton btnDodaj = new JButton("Dodaj");
+		btnDodaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (comboBox.getSelectedIndex() == -1 || comboBox_1.getSelectedIndex() == -1
+						|| comboBox_2.getSelectedIndex() == -1 || comboBox_4.getSelectedIndex() == -1
+						|| textField.getText().strip().isEmpty() || textArea.getText().strip().isEmpty())
+					JOptionPane.showMessageDialog(null, "Morate Sve popuniti");
+				else {
+					if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite dodati pregled", "Dodavanje",
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
+						dodajPregled();
+				}
+			}
+		});
+		add(btnDodaj, BorderLayout.SOUTH);
+
+		JPanel panel = new JPanel();
+		add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
+
+		JLabel lblPacijent = new JLabel("Pacijent: ");
+		lblPacijent.setBounds(10, 11, 100, 14);
+		panel.add(lblPacijent);
+
+		JLabel lblLekar = new JLabel("Lekar: ");
+		lblLekar.setBounds(10, 36, 100, 14);
+		panel.add(lblLekar);
+
+		JLabel lblVremePocetka = new JLabel("Vreme Pocetka: ");
+		lblVremePocetka.setBounds(10, 86, 100, 14);
+		panel.add(lblVremePocetka);
+
+		JLabel lblSoba = new JLabel("Soba: ");
+		lblSoba.setBounds(10, 61, 100, 14);
+		panel.add(lblSoba);
+
+		JLabel lblOpis = new JLabel("Opis: ");
+		lblOpis.setBounds(10, 136, 100, 14);
+		panel.add(lblOpis);
+
+		JLabel lblStatus = new JLabel("Status: ");
+		lblStatus.setBounds(10, 111, 100, 14);
+		panel.add(lblStatus);
+
+		comboBox = new JComboBox<Pacijent>(
+				new DefaultComboBoxModel<Pacijent>(DataStore.pacijenti.values().toArray(Pacijent[]::new)));
+		comboBox.setBounds(120, 7, 378, 22);
+		panel.add(comboBox);
+
+		comboBox_1 = new JComboBox<Lekar>(
+				new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
+		comboBox_1.setSelectedIndex(-1);
+		comboBox_1.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if (comboBox_1.getSelectedIndex() != -1) {
+					comboBox_2.setModel(new DefaultComboBoxModel<Soba>(DataStore.sobe
+							.values().stream().filter(i -> ((Soba) i)
+									.getIdDomaZdravlja() == ((Lekar) comboBox_1.getSelectedItem()).getDomZdravljaId())
+							.toArray(Soba[]::new)));
+					comboBox_2.setEnabled(true);
+					textField.setEnabled(true);
+					btnProveri.setEnabled(true);
+
+				} else {
+					comboBox_2.setEnabled(false);
+					textField.setEnabled(false);
+					btnProveri.setEnabled(false);
+				}
+			}
+		});
+		comboBox_1.setBounds(120, 32, 378, 22);
+		panel.add(comboBox_1);
+
+		comboBox_2 = new JComboBox<Soba>();
+		comboBox_2.setEnabled(false);
+		comboBox_2.setBounds(120, 57, 378, 22);
+		panel.add(comboBox_2);
+
+		comboBox_4 = new JComboBox<StatusPregleda>(new DefaultComboBoxModel<StatusPregleda>(StatusPregleda.values()));
+		comboBox_4.setBounds(120, 107, 378, 22);
+		panel.add(comboBox_4);
+
+		textArea = new JTextArea();
+		textArea.setBounds(120, 131, 378, 145);
+		panel.add(textArea);
+
+		textField = new JTextField();
+		textField.setEnabled(false);
+		textField.setToolTipText("HH:MM dd-mm-yyyy");
+		textField.setBounds(120, 83, 161, 20);
+		panel.add(textField);
+		textField.setColumns(10);
+
+		btnProveri = new JButton("Proveri");
+		btnProveri.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (DataStore.proveriIspravnostIDostupnostTermina(textField.getText().strip(),
+						((Lekar) comboBox_1.getSelectedItem())))
+					JOptionPane.showMessageDialog(null, "Termin ispravan");
+				else
+					JOptionPane.showMessageDialog(null, "Termin neispravan");
+			}
+		});
+		btnProveri.setEnabled(false);
+		btnProveri.setBounds(291, 82, 89, 23);
+		panel.add(btnProveri);
+
+	}
+
+	protected void dodajPregled() {
+		var pacijent = (Pacijent) comboBox.getSelectedItem();
+		var lekar = (Lekar) comboBox_1.getSelectedItem();
+		var soba = (Soba) comboBox_2.getSelectedItem();
+		var status = (StatusPregleda) comboBox_4.getSelectedItem();
+
+		if (DataStore.proveriIspravnostIDostupnostTermina(textField.getText().strip(), lekar)) {
+			var pregled = new Pregled(-2, pacijent.getId(), lekar.getId(),
+					LocalDateTime.parse(textField.getText().strip(), DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy")),
+					soba.getId(), textArea.getText().strip(), status);
+			try {
+				DataStore.dodaj(pregled);
+				JOptionPane.showMessageDialog(null, "Uspesno ste dodali");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Greska pri dodavanju");
+			}
+		} else
+			JOptionPane.showMessageDialog(null, "Neispravan datum");
+
+	}
+
+	protected JComboBox<Soba> getComboBox_2() {
+		return comboBox_2;
+	}
+
+	protected JComboBox<StatusPregleda> getComboBox_4() {
+		return comboBox_4;
+	}
+
+	protected JComboBox<Lekar> getComboBox_1() {
+		return comboBox_1;
+	}
+
+	protected JComboBox<Pacijent> getComboBox() {
+		return comboBox;
+	}
+
+	protected JTextArea getTextArea() {
+		return textArea;
+	}
+
+	protected JButton getBtnProveri() {
+		return btnProveri;
+	}
+}

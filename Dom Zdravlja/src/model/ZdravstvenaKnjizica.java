@@ -46,7 +46,7 @@ public class ZdravstvenaKnjizica extends Identifiable{
 	}
 	@Override
 	public String toString() {
-		return "ZdravstvenaKnjizica br.: "+this.getId()+", Datum Isteka: "+this.getDatumIsteka()+", Kategorija: "+this.getKategorija().toString();
+		return "ZdravstvenaKnjizica br.: "+this.getId()+"Korisnik id: "+this.getIdKorisnika()+", Datum Isteka: "+this.getDatumIsteka()+", Kategorija: "+this.getKategorija().toString();
 	}
 	
 	public static Identifiable CreateFromString(String text) {
