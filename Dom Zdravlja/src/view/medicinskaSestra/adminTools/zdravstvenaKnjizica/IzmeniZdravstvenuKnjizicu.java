@@ -21,6 +21,7 @@ import javax.swing.border.TitledBorder;
 import controller.DataStore;
 import model.KategorijaOsiguranja;
 import model.ZdravstvenaKnjizica;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class IzmeniZdravstvenuKnjizicu extends JPanel {
@@ -67,34 +68,33 @@ public class IzmeniZdravstvenuKnjizicu extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(null);
+		panel_1.setLayout(new MigLayout("fillx", "[left][left, fill][][][]"));
 
 		JLabel lblKorisnik = new JLabel("Korisnik: ");
 		lblKorisnik.setBounds(10, 11, 100, 14);
-		panel_1.add(lblKorisnik);
+		panel_1.add(lblKorisnik, "cell 0 0 1 1");
 
 		JLabel lblVremeIsteka = new JLabel("Vreme Isteka:");
 		lblVremeIsteka.setBounds(10, 36, 100, 14);
-		panel_1.add(lblVremeIsteka);
+		panel_1.add(lblVremeIsteka, "cell 0 1 1 1");
 
 		JLabel lblKategorija = new JLabel("Kategorija: ");
 		lblKategorija.setBounds(10, 61, 100, 14);
-		panel_1.add(lblKategorija);
+		panel_1.add(lblKategorija, "cell 0 2 1 1");
 
 		lblNewLabel = new JLabel(" ");
 		lblNewLabel.setBounds(120, 11, 308, 14);
-		panel_1.add(lblNewLabel);
+		panel_1.add(lblNewLabel, "cell 1 0 4 1");
 
 		textField = new JTextField();
 		textField.setBounds(120, 33, 308, 20);
-		panel_1.add(textField);
-		textField.setColumns(10);
+		panel_1.add(textField, "cell 1 1 4 1");
 
 		comboBox_1 = new JComboBox<KategorijaOsiguranja>(
 				new DefaultComboBoxModel<KategorijaOsiguranja>(Stream.of(KategorijaOsiguranja.values())
 						.filter(k -> k != KategorijaOsiguranja.nema).toArray(KategorijaOsiguranja[]::new)));
 		comboBox_1.setBounds(120, 57, 308, 22);
-		panel_1.add(comboBox_1);
+		panel_1.add(comboBox_1, "cell 1 2 4 1");
 
 	}
 

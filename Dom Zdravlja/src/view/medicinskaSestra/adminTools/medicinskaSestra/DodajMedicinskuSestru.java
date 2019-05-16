@@ -22,6 +22,7 @@ import controller.DataStore;
 import model.DomZdravlja;
 import model.MedicinskaSestra;
 import model.Sluzba;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class DodajMedicinskuSestru extends JPanel {
@@ -59,7 +60,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		panel.setLayout(new MigLayout("fillx", "[left][left, fill][][][]"));
 		
 		JLabel label = new JLabel("Ime: ");
 		label.setBounds(10, 14, 108, 14);
@@ -68,7 +69,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(128, 11, 300, 20);
-		panel.add(textField);
+		panel.add(textField, "span 4, wrap");
 		
 		JLabel label_1 = new JLabel("Prezime: ");
 		label_1.setBounds(10, 38, 108, 14);
@@ -77,7 +78,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(128, 35, 300, 20);
-		panel.add(textField_1);
+		panel.add(textField_1, "span 4, wrap");
 		
 		JLabel label_2 = new JLabel("JMBG: ");
 		label_2.setBounds(10, 66, 108, 14);
@@ -86,7 +87,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
 		textField_2.setBounds(128, 63, 300, 20);
-		panel.add(textField_2);
+		panel.add(textField_2, "span 4, wrap");
 		
 		JLabel label_3 = new JLabel("Pol: ");
 		label_3.setBounds(10, 94, 108, 14);
@@ -101,7 +102,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		radioButton_1 = new JRadioButton("Zenski");
 		buttonGroup.add(radioButton_1);
 		radioButton_1.setBounds(190, 89, 109, 23);
-		panel.add(radioButton_1);
+		panel.add(radioButton_1, "wrap");
 		
 		JLabel label_4 = new JLabel("Adresa: ");
 		label_4.setBounds(10, 122, 108, 14);
@@ -110,7 +111,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
 		textField_3.setBounds(128, 119, 300, 20);
-		panel.add(textField_3);
+		panel.add(textField_3, "span 4, wrap");
 		
 		JLabel label_5 = new JLabel("Broj Telefona: ");
 		label_5.setBounds(10, 153, 108, 14);
@@ -119,7 +120,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		textField_4.setBounds(128, 150, 300, 20);
-		panel.add(textField_4);
+		panel.add(textField_4, "span 4, wrap");
 		
 		JLabel label_6 = new JLabel("Username: ");
 		label_6.setBounds(10, 184, 108, 14);
@@ -128,7 +129,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		textField_5.setBounds(128, 181, 300, 20);
-		panel.add(textField_5);
+		panel.add(textField_5, "span 4, wrap");
 		
 		JLabel label_7 = new JLabel("Password: ");
 		label_7.setBounds(10, 215, 108, 14);
@@ -136,7 +137,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(128, 212, 300, 20);
-		panel.add(passwordField);
+		panel.add(passwordField, "span 4, wrap");
 		
 		JLabel label_8 = new JLabel("Plata: ");
 		label_8.setBounds(10, 243, 108, 14);
@@ -145,7 +146,7 @@ public class DodajMedicinskuSestru extends JPanel {
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
 		textField_6.setBounds(128, 240, 300, 20);
-		panel.add(textField_6);
+		panel.add(textField_6, "span 4, wrap");
 		
 		JLabel label_9 = new JLabel("Dom Zdravlja: ");
 		label_9.setBounds(10, 277, 108, 14);
@@ -163,17 +164,18 @@ public class DodajMedicinskuSestru extends JPanel {
 		});
 		comboBox.setSelectedIndex(-1);
 		comboBox.setBounds(128, 273, 300, 22);
-		panel.add(comboBox);
+		panel.add(comboBox, "span 4, wrap");		
+		
+		JLabel label_10 = new JLabel("Sluzba: ");
+		label_10.setBounds(10, 306, 108, 14);
+		panel.add(label_10);
 		
 		comboBox_1 = new JComboBox<Sluzba>();
 		comboBox_1.setSelectedIndex(-1);
 		comboBox_1.setEnabled(false);
 		comboBox_1.setBounds(128, 302, 300, 22);
-		panel.add(comboBox_1);
-		
-		JLabel label_10 = new JLabel("Sluzba: ");
-		label_10.setBounds(10, 306, 108, 14);
-		panel.add(label_10);
+		panel.add(comboBox_1, "span 4");
+
 		
 
 	}

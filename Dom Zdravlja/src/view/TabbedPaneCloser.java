@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -32,9 +33,8 @@ public class TabbedPaneCloser extends JPanel {
 		});
 		panel.add(btnZatvori, BorderLayout.EAST);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.add(this.toDisplay, BorderLayout.CENTER);
+		JScrollPane panel_1 = new JScrollPane();
+		panel_1.setViewportView(this.toDisplay);
 		add(panel_1, BorderLayout.CENTER);
 		
 

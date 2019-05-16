@@ -20,6 +20,7 @@ import javax.swing.border.EmptyBorder;
 import controller.Miscellaneous;
 import model.KategorijaOsiguranja;
 import model.ZdravstvenaKnjizica;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class NovaKnjizica extends JDialog {
@@ -55,7 +56,7 @@ public class NovaKnjizica extends JDialog {
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(null);
+		contentPanel.setLayout(new MigLayout("fillx", "[left][left, fill][][][]"));
 		
 		JLabel lblDatumIstekaddmmyyyy = new JLabel("Datum Isteka(dd-mm-yyyy): ");
 		lblDatumIstekaddmmyyyy.setBounds(10, 11, 150, 14);
@@ -63,8 +64,8 @@ public class NovaKnjizica extends JDialog {
 		
 		textField = new JTextField();
 		textField.setBounds(170, 8, 254, 20);
-		contentPanel.add(textField);
-		textField.setColumns(10);
+		contentPanel.add(textField, "span 4, wrap");
+
 		
 		JLabel lblKategorija = new JLabel("Kategorija: ");
 		lblKategorija.setBounds(10, 39, 150, 14);
@@ -75,7 +76,7 @@ public class NovaKnjizica extends JDialog {
 		comboBox.setModel(dcm);
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(170, 39, 254, 22);
-		contentPanel.add(comboBox);
+		contentPanel.add(comboBox , "span 4");
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

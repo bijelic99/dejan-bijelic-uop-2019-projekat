@@ -20,6 +20,8 @@ import javax.swing.border.TitledBorder;
 import controller.DataStore;
 import model.Lekar;
 import model.Pacijent;
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 
@@ -63,34 +65,38 @@ public class IzmeniPacijenta extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(null);
-
-		comboBox_1 = new JComboBox<Lekar>(new DefaultComboBoxModel<Lekar>(
-				DataStore.lekari.values().stream().map(i -> (Lekar) i).toArray(Lekar[]::new)));
-		comboBox_1.setBounds(128, 242, 300, 22);
-		panel_1.add(comboBox_1);
-
+		panel_1.setLayout(new MigLayout("fillx", "[left][left, fill][][][]"));
+		
 		JLabel label = new JLabel("Izabrani Lekar: ");
 		label.setBounds(10, 246, 108, 14);
 		panel_1.add(label);
 
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(128, 150, 300, 20);
-		panel_1.add(textField_1);
+		comboBox_1 = new JComboBox<Lekar>(new DefaultComboBoxModel<Lekar>(
+				DataStore.lekari.values().stream().map(i -> (Lekar) i).toArray(Lekar[]::new)));
+		comboBox_1.setBounds(128, 242, 300, 22);
+		panel_1.add(comboBox_1, "span 4, wrap");
 
 		JLabel label_3 = new JLabel("Broj Telefona: ");
 		label_3.setBounds(10, 153, 108, 14);
 		panel_1.add(label_3);
-
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(128, 119, 300, 20);
-		panel_1.add(textField_2);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(128, 150, 300, 20);
+		panel_1.add(textField_1, "span 4, wrap");
 
 		JLabel label_4 = new JLabel("Adresa: ");
 		label_4.setBounds(10, 122, 108, 14);
 		panel_1.add(label_4);
+
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(128, 119, 300, 20);
+		panel_1.add(textField_2, "span 4, wrap");
+
+		JLabel label_5 = new JLabel("Pol: ");
+		label_5.setBounds(10, 94, 108, 14);
+		panel_1.add(label_5);
 
 		radioButton = new JRadioButton("Zenski");
 		buttonGroup.add(radioButton);
@@ -101,38 +107,35 @@ public class IzmeniPacijenta extends JPanel {
 		buttonGroup.add(radioButton_1);
 		radioButton_1.setSelected(true);
 		radioButton_1.setBounds(128, 89, 60, 23);
-		panel_1.add(radioButton_1);
-
-		JLabel label_5 = new JLabel("Pol: ");
-		label_5.setBounds(10, 94, 108, 14);
-		panel_1.add(label_5);
-
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(128, 63, 300, 20);
-		panel_1.add(textField_3);
+		panel_1.add(radioButton_1,"wrap");
 
 		JLabel label_6 = new JLabel("JMBG: ");
 		label_6.setBounds(10, 66, 108, 14);
 		panel_1.add(label_6);
 
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(128, 35, 300, 20);
-		panel_1.add(textField_4);
+
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(128, 63, 300, 20);
+		panel_1.add(textField_3, "span 4, wrap");
 
 		JLabel label_7 = new JLabel("Prezime: ");
 		label_7.setBounds(10, 38, 108, 14);
 		panel_1.add(label_7);
-
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(128, 11, 300, 20);
-		panel_1.add(textField_5);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(128, 35, 300, 20);
+		panel_1.add(textField_4, "span 4, wrap");
 
 		JLabel label_8 = new JLabel("Ime: ");
 		label_8.setBounds(10, 14, 108, 14);
 		panel_1.add(label_8);
+
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(128, 11, 300, 20);
+		panel_1.add(textField_5, "span 4");
 
 		JButton btnIzmeni = new JButton("Izmeni");
 		btnIzmeni.addActionListener(new ActionListener() {

@@ -26,6 +26,7 @@ import model.Pregled;
 import model.Soba;
 import model.StatusPregleda;
 import model.Termin;
+import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class IzmeniPregled extends JPanel {
@@ -72,38 +73,22 @@ public class IzmeniPregled extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(null);
+		panel_1.setLayout(new MigLayout("fillx", "[left][left, fill][][][fill]","[][][][][fill]"));
 
 		JLabel label = new JLabel("Pacijent: ");
 		label.setBounds(10, 15, 100, 14);
 		panel_1.add(label);
+		
+		comboBox_1 = new JComboBox<Pacijent>(
+				new DefaultComboBoxModel<Pacijent>(DataStore.pacijenti.values().toArray(Pacijent[]::new)));
+		
+		comboBox_1.setBounds(120, 11, 378, 22);
+		panel_1.add(comboBox_1, "span 4, wrap");
 
 		JLabel label_1 = new JLabel("Lekar: ");
 		label_1.setBounds(10, 40, 100, 14);
 		panel_1.add(label_1);
-
-		JLabel label_2 = new JLabel("Vreme Pocetka: ");
-		label_2.setBounds(10, 90, 100, 14);
-		panel_1.add(label_2);
-
-		JLabel label_3 = new JLabel("Soba: ");
-		label_3.setBounds(10, 65, 100, 14);
-		panel_1.add(label_3);
-
-		JLabel label_4 = new JLabel("Opis: ");
-		label_4.setBounds(10, 140, 100, 14);
-		panel_1.add(label_4);
-
-		JLabel label_5 = new JLabel("Status: ");
-		label_5.setBounds(10, 115, 100, 14);
-		panel_1.add(label_5);
-
-		comboBox_1 = new JComboBox<Pacijent>(
-				new DefaultComboBoxModel<Pacijent>(DataStore.pacijenti.values().toArray(Pacijent[]::new)));
-
-		comboBox_1.setBounds(120, 11, 378, 22);
-		panel_1.add(comboBox_1);
-
+		
 		comboBox_2 = new JComboBox<Lekar>(
 				new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
 		comboBox_2.setSelectedIndex(-1);
@@ -117,7 +102,7 @@ public class IzmeniPregled extends JPanel {
 					comboBox_3.setEnabled(true);
 					textField.setEnabled(true);
 					btnProveri.setEnabled(true);
-
+					
 				} else {
 					comboBox_3.setEnabled(false);
 					textField.setEnabled(false);
@@ -125,30 +110,20 @@ public class IzmeniPregled extends JPanel {
 				}
 			}
 		});
-
 		comboBox_2.setBounds(120, 36, 378, 22);
-		panel_1.add(comboBox_2);
+		panel_1.add(comboBox_2, "span 4, wrap");
 
-		comboBox_3 = new JComboBox<Soba>();
-		comboBox_3.setEnabled(false);
-		comboBox_3.setBounds(120, 61, 378, 22);
-		panel_1.add(comboBox_3);
-
-		comboBox_4 = new JComboBox<StatusPregleda>(new DefaultComboBoxModel<StatusPregleda>(StatusPregleda.values()));
-		comboBox_4.setBounds(120, 111, 378, 22);
-		panel_1.add(comboBox_4);
-
-		textArea = new JTextArea();
-		textArea.setBounds(120, 135, 378, 145);
-		panel_1.add(textArea);
-
+		JLabel label_2 = new JLabel("Vreme Pocetka: ");
+		label_2.setBounds(10, 90, 100, 14);
+		panel_1.add(label_2);
+		
 		textField = new JTextField();
 		textField.setToolTipText("HH:MM dd-mm-yyyy");
 		textField.setEnabled(false);
 		textField.setColumns(10);
 		textField.setBounds(120, 87, 161, 20);
-		panel_1.add(textField);
-
+		panel_1.add(textField, "span 3");
+		
 		btnProveri = new JButton("Proveri");
 		btnProveri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -156,12 +131,39 @@ public class IzmeniPregled extends JPanel {
 					JOptionPane.showMessageDialog(null, "Termin ispravan");
 				else
 					JOptionPane.showMessageDialog(null, "Termin neispravan");
-
+				
 			}
 		});
 		btnProveri.setEnabled(false);
 		btnProveri.setBounds(291, 86, 89, 23);
-		panel_1.add(btnProveri);
+		panel_1.add(btnProveri, "wrap");
+		
+		JLabel label_3 = new JLabel("Soba: ");
+		label_3.setBounds(10, 65, 100, 14);
+		panel_1.add(label_3);
+		
+		comboBox_3 = new JComboBox<Soba>();
+		comboBox_3.setEnabled(false);
+		comboBox_3.setBounds(120, 61, 378, 22);
+		panel_1.add(comboBox_3, "span 4, wrap");
+
+		JLabel label_4 = new JLabel("Opis: ");
+		label_4.setBounds(10, 140, 100, 14);
+		panel_1.add(label_4);
+		
+		textArea = new JTextArea();
+		textArea.setRows(4);
+		textArea.setBounds(120, 135, 378, 145);
+		panel_1.add(textArea, "span 4 3, wrap");
+
+		JLabel label_5 = new JLabel("Status: ");
+		label_5.setBounds(10, 115, 100, 14);
+		panel_1.add(label_5, "cell 0 7");
+
+		comboBox_4 = new JComboBox<StatusPregleda>(new DefaultComboBoxModel<StatusPregleda>(StatusPregleda.values()));
+		comboBox_4.setBounds(120, 111, 378, 22);
+		panel_1.add(comboBox_4, "span 4");
+
 
 	}
 

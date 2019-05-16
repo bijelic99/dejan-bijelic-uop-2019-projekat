@@ -23,6 +23,8 @@ import model.Pacijent;
 import model.Pregled;
 import model.Soba;
 import model.StatusPregleda;
+import net.miginfocom.swing.MigLayout;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -62,37 +64,21 @@ public class DodajPregled extends JPanel {
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
+		panel.setLayout(new MigLayout("fillx", "[left][left, fill][][][fill]","[][][][][fill]"));
 
 		JLabel lblPacijent = new JLabel("Pacijent: ");
 		lblPacijent.setBounds(10, 11, 100, 14);
 		panel.add(lblPacijent);
-
-		JLabel lblLekar = new JLabel("Lekar: ");
-		lblLekar.setBounds(10, 36, 100, 14);
-		panel.add(lblLekar);
-
-		JLabel lblVremePocetka = new JLabel("Vreme Pocetka: ");
-		lblVremePocetka.setBounds(10, 86, 100, 14);
-		panel.add(lblVremePocetka);
-
-		JLabel lblSoba = new JLabel("Soba: ");
-		lblSoba.setBounds(10, 61, 100, 14);
-		panel.add(lblSoba);
-
-		JLabel lblOpis = new JLabel("Opis: ");
-		lblOpis.setBounds(10, 136, 100, 14);
-		panel.add(lblOpis);
-
-		JLabel lblStatus = new JLabel("Status: ");
-		lblStatus.setBounds(10, 111, 100, 14);
-		panel.add(lblStatus);
-
+		
 		comboBox = new JComboBox<Pacijent>(
 				new DefaultComboBoxModel<Pacijent>(DataStore.pacijenti.values().toArray(Pacijent[]::new)));
 		comboBox.setBounds(120, 7, 378, 22);
-		panel.add(comboBox);
-
+		panel.add(comboBox, "span 4, wrap");
+		
+		JLabel lblLekar = new JLabel("Lekar: ");
+		lblLekar.setBounds(10, 36, 100, 14);
+		panel.add(lblLekar);
+		
 		comboBox_1 = new JComboBox<Lekar>(
 				new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
 		comboBox_1.setSelectedIndex(-1);
@@ -115,28 +101,18 @@ public class DodajPregled extends JPanel {
 			}
 		});
 		comboBox_1.setBounds(120, 32, 378, 22);
-		panel.add(comboBox_1);
+		panel.add(comboBox_1, "span 4, wrap");
 
-		comboBox_2 = new JComboBox<Soba>();
-		comboBox_2.setEnabled(false);
-		comboBox_2.setBounds(120, 57, 378, 22);
-		panel.add(comboBox_2);
-
-		comboBox_4 = new JComboBox<StatusPregleda>(new DefaultComboBoxModel<StatusPregleda>(StatusPregleda.values()));
-		comboBox_4.setBounds(120, 107, 378, 22);
-		panel.add(comboBox_4);
-
-		textArea = new JTextArea();
-		textArea.setBounds(120, 131, 378, 145);
-		panel.add(textArea);
+		JLabel lblVremePocetka = new JLabel("Vreme Pocetka: ");
+		lblVremePocetka.setBounds(10, 86, 100, 14);
+		panel.add(lblVremePocetka);
 
 		textField = new JTextField();
 		textField.setEnabled(false);
 		textField.setToolTipText("HH:MM dd-mm-yyyy");
 		textField.setBounds(120, 83, 161, 20);
-		panel.add(textField);
-		textField.setColumns(10);
-
+		panel.add(textField, "span 3");
+		
 		btnProveri = new JButton("Proveri");
 		btnProveri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -149,7 +125,39 @@ public class DodajPregled extends JPanel {
 		});
 		btnProveri.setEnabled(false);
 		btnProveri.setBounds(291, 82, 89, 23);
-		panel.add(btnProveri);
+		panel.add(btnProveri, "wrap");
+		
+		JLabel lblSoba = new JLabel("Soba: ");
+		lblSoba.setBounds(10, 61, 100, 14);
+		panel.add(lblSoba);
+
+		comboBox_2 = new JComboBox<Soba>();
+		comboBox_2.setEnabled(false);
+		comboBox_2.setBounds(120, 57, 378, 22);
+		panel.add(comboBox_2, "span 4, wrap");
+		
+		JLabel lblOpis = new JLabel("Opis: ");
+		lblOpis.setBounds(10, 136, 100, 14);
+		panel.add(lblOpis);
+		
+		textArea = new JTextArea();
+		textArea.setRows(4);
+		textArea.setBounds(120, 131, 378, 145);
+		panel.add(textArea, "span 4 3, wrap");
+		
+		JLabel lblStatus = new JLabel("Status: ");
+		lblStatus.setBounds(10, 111, 100, 14);
+		panel.add(lblStatus,"cell 0 7");
+
+		comboBox_4 = new JComboBox<StatusPregleda>(new DefaultComboBoxModel<StatusPregleda>(StatusPregleda.values()));
+		comboBox_4.setBounds(120, 107, 378, 22);
+		panel.add(comboBox_4, "span 4, wrap");
+
+
+
+
+
+		
 
 	}
 
