@@ -1,7 +1,9 @@
-package view.medicinskaSestra.adminTools.pregled;
+package view.medicinskaSestra.pregledi;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.time.LocalDateTime;
@@ -24,14 +26,11 @@ import model.Pregled;
 import model.Soba;
 import model.StatusPregleda;
 import net.miginfocom.swing.MigLayout;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EtchedBorder;
 
 @SuppressWarnings("serial")
-public class DodajPregled extends JPanel {
+public class ZakaziPregled extends JPanel {
 	protected JComboBox<Soba> comboBox_2;
-	protected JComboBox<StatusPregleda> comboBox_4;
 	protected JComboBox<Lekar> comboBox_1;
 	protected JComboBox<Pacijent> comboBox;
 	protected JTextArea textArea;
@@ -41,44 +40,43 @@ public class DodajPregled extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DodajPregled() {
-		setBorder(new TitledBorder(null, "Dodaj Pregled", TitledBorder.LEADING, TitledBorder.TOP, null,
-				new Color(0, 0, 0)));
+	public ZakaziPregled() {
+		setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Zakazi Pregled", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		setLayout(new BorderLayout(0, 0));
 
-		JButton btnDodaj = new JButton("Dodaj");
-		btnDodaj.addActionListener(new ActionListener() {
+		JButton btnZakazi = new JButton("Zakazi");
+		btnZakazi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox.getSelectedIndex() == -1 || comboBox_1.getSelectedIndex() == -1
-						|| comboBox_2.getSelectedIndex() == -1 || comboBox_4.getSelectedIndex() == -1
-						|| textField.getText().strip().isEmpty() || textArea.getText().strip().isEmpty())
+						|| comboBox_2.getSelectedIndex() == -1 || textField.getText().strip().isEmpty()
+						|| textArea.getText().strip().isEmpty())
 					JOptionPane.showMessageDialog(null, "Morate Sve popuniti");
 				else {
-					if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite dodati pregled", "Dodavanje",
+					if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite zakazati pregled", "Dodavanje",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
-						dodajPregled();
+						zakaziPregled();
 				}
 			}
 		});
-		add(btnDodaj, BorderLayout.SOUTH);
+		add(btnZakazi, BorderLayout.SOUTH);
 
 		JPanel panel = new JPanel();
 		add(panel, BorderLayout.CENTER);
-		panel.setLayout(new MigLayout("fillx", "[left][left, fill][][][fill]","[][][][][fill]"));
+		panel.setLayout(new MigLayout("fillx", "[left][left, fill][][][fill]", "[][][][][fill]"));
 
 		JLabel lblPacijent = new JLabel("Pacijent: ");
 		lblPacijent.setBounds(10, 11, 100, 14);
 		panel.add(lblPacijent);
-		
+
 		comboBox = new JComboBox<Pacijent>(
 				new DefaultComboBoxModel<Pacijent>(DataStore.pacijenti.values().toArray(Pacijent[]::new)));
 		comboBox.setBounds(120, 7, 378, 22);
 		panel.add(comboBox, "span 4, wrap");
-		
+
 		JLabel lblLekar = new JLabel("Lekar: ");
 		lblLekar.setBounds(10, 36, 100, 14);
 		panel.add(lblLekar);
-		
+
 		comboBox_1 = new JComboBox<Lekar>(
 				new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
 		comboBox_1.setSelectedIndex(-1);
@@ -112,7 +110,7 @@ public class DodajPregled extends JPanel {
 		textField.setToolTipText("HH:MM dd-mm-yyyy");
 		textField.setBounds(120, 83, 161, 20);
 		panel.add(textField, "span 3");
-		
+
 		btnProveri = new JButton("Proveri");
 		btnProveri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -126,7 +124,7 @@ public class DodajPregled extends JPanel {
 		btnProveri.setEnabled(false);
 		btnProveri.setBounds(291, 82, 89, 23);
 		panel.add(btnProveri, "wrap");
-		
+
 		JLabel lblSoba = new JLabel("Soba: ");
 		lblSoba.setBounds(10, 61, 100, 14);
 		panel.add(lblSoba);
@@ -135,37 +133,31 @@ public class DodajPregled extends JPanel {
 		comboBox_2.setEnabled(false);
 		comboBox_2.setBounds(120, 57, 378, 22);
 		panel.add(comboBox_2, "span 4, wrap");
-		
+
 		JLabel lblOpis = new JLabel("Opis: ");
 		lblOpis.setBounds(10, 136, 100, 14);
 		panel.add(lblOpis);
-		
+
 		textArea = new JTextArea();
 		textArea.setRows(4);
 		textArea.setBounds(120, 131, 378, 145);
 		panel.add(textArea, "span 4 3, wrap");
-		
+
 		JLabel lblStatus = new JLabel("Status: ");
 		lblStatus.setBounds(10, 111, 100, 14);
-		panel.add(lblStatus,"cell 0 7");
+		panel.add(lblStatus, "cell 0 7");
 
-		comboBox_4 = new JComboBox<StatusPregleda>(new DefaultComboBoxModel<StatusPregleda>(StatusPregleda.values()));
-		comboBox_4.setBounds(120, 107, 378, 22);
-		panel.add(comboBox_4, "span 4, wrap");
-
-
-
-
-
-		
+		JLabel lblZakazan = new JLabel("Zakazan");
+		lblZakazan.setBounds(10, 111, 100, 14);
+		panel.add(lblZakazan, "span 4, wrap");
 
 	}
 
-	protected void dodajPregled() {
+	protected void zakaziPregled() {
 		var pacijent = (Pacijent) comboBox.getSelectedItem();
 		var lekar = (Lekar) comboBox_1.getSelectedItem();
 		var soba = (Soba) comboBox_2.getSelectedItem();
-		var status = (StatusPregleda) comboBox_4.getSelectedItem();
+		var status = StatusPregleda.zakazan;
 
 		if (DataStore.proveriIspravnostIDostupnostTermina(textField.getText().strip(), lekar)) {
 			var pregled = new Pregled(-2, pacijent.getId(), lekar.getId(),
@@ -182,5 +174,4 @@ public class DodajPregled extends JPanel {
 
 	}
 
-	
 }

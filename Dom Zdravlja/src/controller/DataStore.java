@@ -263,5 +263,24 @@ public class DataStore {
 		}
 		return true;
 	}
+	public static boolean proveriIspravnostIDostupnostTermina(String termin, int lekarId) {
+		try {
+			var vremePocetka = LocalDateTime.parse(termin, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
+			if(vremePocetka.isAfter(LocalDateTime.now()) || vremePocetka.equals(LocalDateTime.now())) {
+			var vremeKraja = vremePocetka.plusMinutes(15);
+			if (pregledi.values().stream().filter(i -> ((Pregled) i).getLekarId() == lekarId)
+					.map(i -> (Pregled) i).filter(p -> {
+						return !((vremeKraja.isBefore(p.getTermin().getVremePocetka())
+								|| vremeKraja.isEqual(p.getTermin().getVremePocetka()))
+								|| (vremePocetka.isAfter(p.getTermin().getVremeKraja())
+										|| vremePocetka.isEqual(p.getTermin().getVremeKraja())));
+					}).count() != 0)
+				return false;}
+			else return false;
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 
 }
