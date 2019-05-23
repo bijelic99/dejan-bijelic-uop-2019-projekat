@@ -3,9 +3,9 @@ package model;
 import java.util.Scanner;
 import java.util.StringJoiner;
 
-import dao.DAOInterface;
+import controller.DataStore;
 
-public class Racun extends Identifiable{
+public class Racun extends Identifiable {
 	private int pregledId;
 	private double cena;
 	private boolean placen;
@@ -17,7 +17,6 @@ public class Racun extends Identifiable{
 		this.cena = cena;
 		this.placen = placen;
 	}
-
 
 	public Racun() {
 		this(-5, -5, -5, false);
@@ -63,30 +62,27 @@ public class Racun extends Identifiable{
 	}
 
 	private double izracunajCenu() {
-		//nije idealno da ucitava preglede direktno iz fajla, treba doraditi
-		//u buducnosti odraditi da ucitava iz neke liste
-		var pregled = new Pregled();
-		pregled = ((Pregled)DAOInterface.ucitaj(this.getPregledId(),Pregled::CreateFromString, DAOInterface.pregledPath));
-		var pacijent = new Pacijent();
-		pacijent = ((Pacijent)DAOInterface.ucitaj(pregled.getPacijentId(), Pacijent	::CreateFromString, DAOInterface.pacijentPath));
-		var knjizica = new ZdravstvenaKnjizica();
-		knjizica = ((ZdravstvenaKnjizica)DAOInterface.ucitaj(pacijent.getZdravstvenaKnjizicaId(), ZdravstvenaKnjizica::CreateFromString, DAOInterface.zdravstvenaKnjizicaPath));
-		cena = knjizica.getKategorija().getCenaPregleda();
-		return cena;
+		Pregled p = (Pregled) DataStore.pregledi.get(this.getPregledId());
+		try {
+		return DataStore.zdravstveneKnjizice.values().stream().map(i -> (ZdravstvenaKnjizica) i)
+				.filter(z -> z.getIdKorisnika() == p.getPacijentId()).findFirst().get().getKategorija()
+				.getCenaPregleda();}
+		catch (Exception e) {
+			return -5;
+		}
 	}
 
-	
 	public static Identifiable CreateFromString(String text) {
-		
+
 		var sc = new Scanner(text);
 		var racun = new Racun();
 		sc.useDelimiter("\\|");
-		
+
 		racun.setId(sc.nextInt());
 		racun.setPregledId(sc.nextInt());
 		racun.setCena(sc.nextDouble());
 		racun.setPlacen(sc.nextBoolean());
-		
+
 		sc.close();
 		return racun;
 	}
@@ -94,9 +90,8 @@ public class Racun extends Identifiable{
 	@Override
 	public String WriteToString() {
 		var line = new StringJoiner("|");
-		line.add(this.getId()+"").add(this.getPregledId()+"").add(this.getCena()+"").add(this.isPlacen()+"");
+		line.add(this.getId() + "").add(this.getPregledId() + "").add(this.getCena() + "").add(this.isPlacen() + "");
 		return line.toString();
 	}
-	
-	
+
 }

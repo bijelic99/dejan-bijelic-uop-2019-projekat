@@ -282,5 +282,9 @@ public class DataStore {
 		}
 		return true;
 	}
+	public static Racun napraviRacun(Pregled p) {
+		
+		return null;
+	}
 
 }

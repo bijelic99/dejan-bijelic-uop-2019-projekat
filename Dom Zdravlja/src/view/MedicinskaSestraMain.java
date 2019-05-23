@@ -35,6 +35,7 @@ import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.IzmeniZdravstvenuKnj
 import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.PregledajSveZdravstveneKnjizice;
 import view.medicinskaSestra.pregledi.ZakaziPregled;
 import view.medicinskaSestra.pregledi.ZakaziVecZatrazen;
+import view.medicinskaSestra.racun.PrikaziRacun;
 
 public class MedicinskaSestraMain {
 
@@ -208,8 +209,8 @@ public class MedicinskaSestraMain {
 		});
 		mnMedicinskaSestra.add(menuItem_13);
 
-		JMenu mnZdravstveneKnjizice = new JMenu("Zdravstvene Knjizice");
-		mnAdminTools.add(mnZdravstveneKnjizice);
+		JMenu mnZdravstvenaKnjizica = new JMenu("Zdravstvena Knjizica");
+		mnAdminTools.add(mnZdravstvenaKnjizica);
 
 		JMenuItem menuItem_17 = new JMenuItem("Izmeni");
 		menuItem_17.addActionListener(new ActionListener() {
@@ -219,7 +220,7 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Zdravstvenu Knjizicu"));
 			}
 		});
-		mnZdravstveneKnjizice.add(menuItem_17);
+		mnZdravstvenaKnjizica.add(menuItem_17);
 
 		JMenuItem menuItem_19 = new JMenuItem("Pregledaj Sve");
 		menuItem_19.addActionListener(new ActionListener() {
@@ -229,10 +230,10 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Zdravstvene Knjizice"));
 			}
 		});
-		mnZdravstveneKnjizice.add(menuItem_19);
+		mnZdravstvenaKnjizica.add(menuItem_19);
 
-		JMenu mnPregledi = new JMenu("Pregledi");
-		mnAdminTools.add(mnPregledi);
+		JMenu mnPregled2 = new JMenu("Pregled");
+		mnAdminTools.add(mnPregled2);
 
 		JMenuItem menuItem_9 = new JMenuItem("Dodaj");
 		menuItem_9.addActionListener(new ActionListener() {
@@ -241,7 +242,7 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dodaj Pregled"));
 			}
 		});
-		mnPregledi.add(menuItem_9);
+		mnPregled2.add(menuItem_9);
 
 		JMenuItem menuItem_10 = new JMenuItem("Izmeni");
 		menuItem_10.addActionListener(new ActionListener() {
@@ -250,7 +251,7 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Pregled"));
 			}
 		});
-		mnPregledi.add(menuItem_10);
+		mnPregled2.add(menuItem_10);
 
 		JMenuItem menuItem_11 = new JMenuItem("Obrisi");
 		menuItem_11.addActionListener(new ActionListener() {
@@ -259,7 +260,7 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Obrisi Pregled"));
 			}
 		});
-		mnPregledi.add(menuItem_11);
+		mnPregled2.add(menuItem_11);
 
 		JMenuItem menuItem_15 = new JMenuItem("Pregledaj Sve");
 		menuItem_15.addActionListener(new ActionListener() {
@@ -269,25 +270,25 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Preglede"));
 			}
 		});
-		mnPregledi.add(menuItem_15);
+		mnPregled2.add(menuItem_15);
 
-		JMenu mnDomoviZdravlja = new JMenu("Domovi Zdravlja");
-		mnAdminTools.add(mnDomoviZdravlja);
+		JMenu mnDomZdravlja = new JMenu("Dom Zdravlja");
+		mnAdminTools.add(mnDomZdravlja);
 
 		JMenuItem menuItem_6 = new JMenuItem("Dodaj");
-		mnDomoviZdravlja.add(menuItem_6);
+		mnDomZdravlja.add(menuItem_6);
 
 		JMenuItem menuItem_7 = new JMenuItem("Izmeni");
-		mnDomoviZdravlja.add(menuItem_7);
+		mnDomZdravlja.add(menuItem_7);
 
 		JMenuItem menuItem_8 = new JMenuItem("Obrisi");
-		mnDomoviZdravlja.add(menuItem_8);
+		mnDomZdravlja.add(menuItem_8);
 
 		JMenuItem menuItem_14 = new JMenuItem("Pregledaj Sve");
-		mnDomoviZdravlja.add(menuItem_14);
+		mnDomZdravlja.add(menuItem_14);
 
-		JMenu mnPregledi_1 = new JMenu("Pregledi");
-		menuBar.add(mnPregledi_1);
+		JMenu mnPregled_1 = new JMenu("Pregled");
+		menuBar.add(mnPregled_1);
 		
 		JMenuItem mntmPregledajSve_1 = new JMenuItem("Pregledaj Sve");
 		mntmPregledajSve_1.addActionListener(new ActionListener() {
@@ -299,7 +300,7 @@ public class MedicinskaSestraMain {
 		});
 		
 		JMenu mnZakazi = new JMenu("Zakazi");
-		mnPregledi_1.add(mnZakazi);
+		mnPregled_1.add(mnZakazi);
 		
 				JMenuItem mntmZakaziNovi = new JMenuItem("Zakazi Novi");
 				mnZakazi.add(mntmZakaziNovi);
@@ -318,7 +319,19 @@ public class MedicinskaSestraMain {
 						tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazi Pregled"));
 					}
 				});
-		mnPregledi_1.add(mntmPregledajSve_1);
+		mnPregled_1.add(mntmPregledajSve_1);
+		
+		JMenu mnRacun = new JMenu("Racun");
+		menuBar.add(mnRacun);
+		
+		JMenuItem mntmPrikazi = new JMenuItem("Prikazi");
+		mntmPrikazi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Prikazi Racun", new TabbedPaneCloser(new PrikaziRacun(), "Prikazi Racun"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Prikazi Racun"));
+			}
+		});
+		mnRacun.add(mntmPrikazi);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		menuBar.add(horizontalGlue);

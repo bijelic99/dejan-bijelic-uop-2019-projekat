@@ -22,7 +22,7 @@ public class GreetingPanel extends JPanel {
 		if(o == null) o = new Pacijent();
 		setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblDobroDosli = new JLabel("Dobro Dosli: "+o.getIme()+" "+o.getPrezime());
+		JLabel lblDobroDosli = new JLabel("Dobrodosli: "+o.getIme()+" "+o.getPrezime());
 		lblDobroDosli.setFont(new Font("Tahoma", Font.PLAIN, 21));
 		lblDobroDosli.setHorizontalAlignment(SwingConstants.LEFT);
 		add(lblDobroDosli);
