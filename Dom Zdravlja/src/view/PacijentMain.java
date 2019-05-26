@@ -1,26 +1,34 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Router;
-
-import java.awt.BorderLayout;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import view.pacijent.PacijentMenuTab;
+import view.pacijent.pregled.OtkaziPregled;
+import view.pacijent.pregled.Pregledaj;
+import view.pacijent.pregled.ZakaziPregled;
 
 public class PacijentMain {
 
 	private JFrame frmPacijent;
+	private JTabbedPane tabbedPane;
+	private JMenuItem mntmPregledajGotove;
+	private JMenuItem mntmPregledajSve;
+	private JMenuItem mntmZakazi;
+	private JMenuItem mntmOtkazi;
+	private PacijentMenuTab pmt;
 
 	/**
 	 * Launch the application.
@@ -56,15 +64,21 @@ public class PacijentMain {
 
 		JMenuBar menuBar = new JMenuBar();
 		frmPacijent.setJMenuBar(menuBar);
-		
-		JMenu mnPregledi = new JMenu("Pregledi");
+
+		JMenu mnPregledi = new JMenu("Pregled");
 		menuBar.add(mnPregledi);
-		
-		JMenuItem mntmZakazi = new JMenuItem("Zakazi");
+
+		mntmZakazi = new JMenuItem("Zakazi");
 		mnPregledi.add(mntmZakazi);
-		
-		JMenuItem mntmOtkazi = new JMenuItem("Otkazi");
+
+		mntmOtkazi = new JMenuItem("Otkazi");
 		mnPregledi.add(mntmOtkazi);
+
+		mntmPregledajSve = new JMenuItem("Pregledaj Sve");
+		mnPregledi.add(mntmPregledajSve);
+
+		mntmPregledajGotove = new JMenuItem("Pregledaj Zakazane");
+		mnPregledi.add(mntmPregledajGotove);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		menuBar.add(horizontalGlue);
@@ -96,12 +110,82 @@ public class PacijentMain {
 		});
 		mnOther.add(mntmIzadji);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		frmPacijent.getContentPane().add(tabbedPane, BorderLayout.CENTER);
 		frmPacijent.setVisible(true);
 
 		GreetingPanel gp = new GreetingPanel(controller.Router.trenutniKorisnik);
-		tabbedPane.addTab("Dobro dosli", gp);
+		var tpc = new TabbedPaneCloser(gp, "Dobrodosli");
+		tabbedPane.addTab("Dobrodosli", tpc);
+
+		pmt = new PacijentMenuTab();
+		tabbedPane.addTab("Glavni Meni", pmt);
+
+		dodajAkcije();
 	}
 
+	private void dodajAkcije() {
+		mntmZakazi.addActionListener(this::zakaziProzor);
+		pmt.btnZakazi.addActionListener(this::zakaziProzor);
+
+		mntmOtkazi.addActionListener(this::otkaziProzor);
+		pmt.btnOtkazi.addActionListener(this::otkaziProzor);
+		
+		mntmPregledajSve.addActionListener(this::pregledajProzor);
+		pmt.btnPregledajSve.addActionListener(this::pregledajProzor);
+		
+		mntmPregledajGotove.addActionListener(this::pregledajZakazaneProzor);
+		pmt.btnPregledajGotove.addActionListener(this::pregledajZakazaneProzor);
+		
+		
+
+	}
+
+	private void zakaziProzor(ActionEvent e) {
+
+		var zakaziPregled = new ZakaziPregled();
+		var tpc = new TabbedPaneCloser(zakaziPregled, "Zakazi Pregled");
+		tabbedPane.addTab("Zakazi Pregled", tpc);
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazi Pregled"));
+
+	}
+
+	private void otkaziProzor(ActionEvent e) {
+
+		var otkaziPregled = new OtkaziPregled();
+		var tpc = new TabbedPaneCloser(otkaziPregled, "Otkazi Pregled");
+		tabbedPane.addTab("Otkazi Pregled", tpc);
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Otkazi Pregled"));
+
+	}
+
+	private void pregledajProzor(ActionEvent e) {
+		var pregledaj = new Pregledaj(false);
+		var tpc = new TabbedPaneCloser(pregledaj, "Vidi sve preglede");
+		tabbedPane.addTab("Vidi sve preglede", tpc);
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Vidi sve preglede"));
+	}
+
+	private void pregledajZakazaneProzor(ActionEvent e) {
+		var pregledaj = new Pregledaj(true);
+		var tpc = new TabbedPaneCloser(pregledaj, "Vidi zakazane preglede");
+		tabbedPane.addTab("Vidi zakazane preglede", tpc);
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Vidi zakazane preglede"));
+	}
+
+	protected JMenuItem getMntmPregledajGotove() {
+		return mntmPregledajGotove;
+	}
+
+	public JMenuItem getMntmPregledajSve() {
+		return mntmPregledajSve;
+	}
+
+	public JMenuItem getMntmZakazi() {
+		return mntmZakazi;
+	}
+
+	public JMenuItem getMntmOtkazi() {
+		return mntmOtkazi;
+	}
 }

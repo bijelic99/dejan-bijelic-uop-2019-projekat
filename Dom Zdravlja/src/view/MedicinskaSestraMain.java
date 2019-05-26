@@ -365,7 +365,8 @@ public class MedicinskaSestraMain {
 		frmPocetniProzorSestra.setVisible(true);
 
 		GreetingPanel gp = new GreetingPanel(controller.Router.trenutniKorisnik);
-		tabbedPane.addTab("Dobro dosli", gp);
+		var tpc = new TabbedPaneCloser(gp, "Dobrodosli");
+		tabbedPane.addTab("Dobrodosli", tpc);
 
 	}
 }
