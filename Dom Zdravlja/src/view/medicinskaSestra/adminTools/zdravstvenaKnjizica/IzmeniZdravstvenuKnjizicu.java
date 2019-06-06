@@ -20,17 +20,18 @@ import javax.swing.border.TitledBorder;
 
 import controller.DataStore;
 import model.KategorijaOsiguranja;
+import model.Pacijent;
 import model.ZdravstvenaKnjizica;
 import net.miginfocom.swing.MigLayout;
 
 @SuppressWarnings("serial")
 public class IzmeniZdravstvenuKnjizicu extends JPanel {
 
-	private JLabel lblNewLabel;
 	private JTextField textField;
 	private JComboBox<ZdravstvenaKnjizica> comboBox;
 	private JComboBox<KategorijaOsiguranja> comboBox_1;
 	private ZdravstvenaKnjizica menjaSe = null;
+	private JComboBox<Pacijent> comboBox_2;
 
 	/**
 	 * Create the panel.
@@ -82,9 +83,10 @@ public class IzmeniZdravstvenuKnjizicu extends JPanel {
 		lblKategorija.setBounds(10, 61, 100, 14);
 		panel_1.add(lblKategorija, "cell 0 2 1 1");
 
-		lblNewLabel = new JLabel(" ");
-		lblNewLabel.setBounds(120, 11, 308, 14);
-		panel_1.add(lblNewLabel, "cell 1 0 4 1");
+		comboBox_2 = new JComboBox<Pacijent>(
+				new DefaultComboBoxModel<Pacijent>(DataStore.pacijenti.values().toArray(Pacijent[]::new)));
+		comboBox_2.setSelectedIndex(-1);
+		panel_1.add(comboBox_2, "cell 1 0 4 1");
 
 		textField = new JTextField();
 		textField.setBounds(120, 33, 308, 20);
@@ -99,32 +101,48 @@ public class IzmeniZdravstvenuKnjizicu extends JPanel {
 	}
 
 	protected void izmeniZdravstvenuKnjizicu() {
-		try {
-			menjaSe.setDatumIsteka(LocalDate.parse(textField.getText().strip(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-			menjaSe.setKategorija((KategorijaOsiguranja)comboBox_1.getSelectedItem());
-			DataStore.izmeni(menjaSe);
-			JOptionPane.showMessageDialog(null, "Uspesna Izmena");
-		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Morate uneti pravilan datum formata dd-mm-yyyy i odabrati kategoriju");
-		}
-		
+		if (comboBox_2.getSelectedIndex() != -1) {
+			try {
+				menjaSe.setDatumIsteka(
+						LocalDate.parse(textField.getText().strip(), DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+				menjaSe.setKategorija((KategorijaOsiguranja) comboBox_1.getSelectedItem());
+				var pacijent = (Pacijent) comboBox_2.getSelectedItem();
+				pacijent.setZdravstvenaKnjizicaId(menjaSe.getId());
+				menjaSe.setIdKorisnika(pacijent.getId());
+				DataStore.zdravstveneKnjizice.values().stream().map(i -> (ZdravstvenaKnjizica) i)
+						.filter(zk -> zk.getId() != menjaSe.getId() && zk.getIdKorisnika() == pacijent.getId())
+						.forEach(zk -> {
+							zk.setIdKorisnika(-5);
+							try {
+								DataStore.izmeni(zk);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						});
+				DataStore.izmeni(menjaSe);
+				DataStore.izmeni(pacijent);
+				JOptionPane.showMessageDialog(null, "Uspesna Izmena");
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null,
+						"Morate uneti pravilan datum formata dd-mm-yyyy i odabrati kategoriju");
+			}
+		} else
+			JOptionPane.showMessageDialog(null, "Morate uneti korisnika");
+
 	}
 
 	protected void ucitajKorisnika() {
 		menjaSe = (ZdravstvenaKnjizica) comboBox.getSelectedItem();
 		try {
-			lblNewLabel.setText(DataStore.pacijenti.values().stream().filter(i -> i.getId() == menjaSe.getIdKorisnika())
-					.findFirst().get().toString() + "");
+			comboBox_2.setSelectedItem((Pacijent) DataStore.pacijenti.values().stream()
+					.filter(i -> i.getId() == menjaSe.getIdKorisnika()).findFirst().get());
 		} catch (Exception e) {
-			lblNewLabel.setText("Nedostupno");
+			comboBox_2.setSelectedIndex(-1);
 		}
 		textField.setText(menjaSe.getDatumIsteka().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 		comboBox_1.setSelectedItem(menjaSe.getKategorija());
 
-	}
-
-	protected JLabel getLblNewLabel() {
-		return lblNewLabel;
 	}
 
 	protected JComboBox<KategorijaOsiguranja> getComboBox_1() {

@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 
 import controller.Router;
+import view.medicinskaSestra.MedicinskaSestraMenuTab;
 import view.medicinskaSestra.adminTools.lekar.DodajLekara;
 import view.medicinskaSestra.adminTools.lekar.IzmeniLekara;
 import view.medicinskaSestra.adminTools.lekar.ObrisiLekara;
@@ -31,7 +32,9 @@ import view.medicinskaSestra.adminTools.pregled.DodajPregled;
 import view.medicinskaSestra.adminTools.pregled.IzmeniPregled;
 import view.medicinskaSestra.adminTools.pregled.ObrisiPregled;
 import view.medicinskaSestra.adminTools.pregled.PregledajSvePreglede;
+import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.DodajNovuKnjizicu;
 import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.IzmeniZdravstvenuKnjizicu;
+import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.ObrisiZdravstvenuKnjizicu;
 import view.medicinskaSestra.adminTools.zdravstvenaKnjizica.PregledajSveZdravstveneKnjizice;
 import view.medicinskaSestra.pregledi.ZakaziPregled;
 import view.medicinskaSestra.pregledi.ZakaziVecZatrazen;
@@ -220,6 +223,16 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni Zdravstvenu Knjizicu"));
 			}
 		});
+		
+		JMenuItem mntmDodaj_1 = new JMenuItem("Dodaj");
+		mntmDodaj_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Dodaj Zdravstvenu Knjizicu",
+						new TabbedPaneCloser(new DodajNovuKnjizicu(), "Dodaj Zdravstvenu Knjizicu"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dodaj Zdravstvenu Knjizicu"));
+			}
+		});
+		mnZdravstvenaKnjizica.add(mntmDodaj_1);
 		mnZdravstvenaKnjizica.add(menuItem_17);
 
 		JMenuItem menuItem_19 = new JMenuItem("Pregledaj Sve");
@@ -230,6 +243,15 @@ public class MedicinskaSestraMain {
 				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Zdravstvene Knjizice"));
 			}
 		});
+		
+		JMenuItem mntmObrisi_1 = new JMenuItem("Obrisi");
+		mntmObrisi_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tabbedPane.add("Obrisi Zdravstvenu Knjizicu", new TabbedPaneCloser(new ObrisiZdravstvenuKnjizicu(), "Obrisi Zdravstvenu Knjizicu"));
+				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Obrisi Zdravstvenu Knjizicu"));
+			}
+		});
+		mnZdravstvenaKnjizica.add(mntmObrisi_1);
 		mnZdravstvenaKnjizica.add(menuItem_19);
 
 		JMenu mnPregled2 = new JMenu("Pregled");
@@ -291,13 +313,7 @@ public class MedicinskaSestraMain {
 		menuBar.add(mnPregled_1);
 		
 		JMenuItem mntmPregledajSve_1 = new JMenuItem("Pregledaj Sve");
-		mntmPregledajSve_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tabbedPane.add("Pregledaj Preglede",
-						new TabbedPaneCloser(new PregledajSvePreglede(), "Pregledaj Preglede"));
-				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Preglede"));
-			}
-		});
+		mntmPregledajSve_1.addActionListener(this::pregledajSvePreglede);
 		
 		JMenu mnZakazi = new JMenu("Zakazi");
 		mnPregled_1.add(mnZakazi);
@@ -306,31 +322,16 @@ public class MedicinskaSestraMain {
 				mnZakazi.add(mntmZakaziNovi);
 				
 				JMenuItem mntmZakaziVecZatrazen = new JMenuItem("Zakazi Vec Zatrazen");
-				mntmZakaziVecZatrazen.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						tabbedPane.add("Zakazi Zatrazen Pregled", new TabbedPaneCloser(new ZakaziVecZatrazen(), "Zakazi Zatrazen Pregled"));
-						tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazi Zatrazen Pregled"));
-					}
-				});
+				mntmZakaziVecZatrazen.addActionListener(this::zakaziVecZatrazenPregled);
 				mnZakazi.add(mntmZakaziVecZatrazen);
-				mntmZakaziNovi.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						tabbedPane.add("Zakazi Pregled", new TabbedPaneCloser(new ZakaziPregled(), "Zakazi Pregled"));
-						tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazi Pregled"));
-					}
-				});
+				mntmZakaziNovi.addActionListener(this::zakaziPregled);
 		mnPregled_1.add(mntmPregledajSve_1);
 		
 		JMenu mnRacun = new JMenu("Racun");
 		menuBar.add(mnRacun);
 		
 		JMenuItem mntmPrikazi = new JMenuItem("Prikazi");
-		mntmPrikazi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tabbedPane.add("Prikazi Racun", new TabbedPaneCloser(new PrikaziRacun(), "Prikazi Racun"));
-				tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Prikazi Racun"));
-			}
-		});
+		mntmPrikazi.addActionListener(this::pregledajSveRacune);
 		mnRacun.add(mntmPrikazi);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
@@ -340,33 +341,63 @@ public class MedicinskaSestraMain {
 		menuBar.add(mnOther);
 
 		JMenuItem mntmOdjaviSe = new JMenuItem("Odjavi se");
-		mntmOdjaviSe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmPocetniProzorSestra.dispose();
-				Router.trenutniKorisnik = null;
-				Router.userRoute();
-			}
-		});
+		mntmOdjaviSe.addActionListener(this::odjava);
 		mnOther.add(mntmOdjaviSe);
 
 		JMenuItem mntmIzadji = new JMenuItem("Izadji");
-		mntmIzadji.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switch (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite izaci", "Izlaz",
-						JOptionPane.YES_NO_OPTION)) {
-				case JOptionPane.YES_OPTION:
-					System.exit(0);
-				default:
-					break;
-				}
-			}
-		});
+		mntmIzadji.addActionListener(this::izlaz);
 		mnOther.add(mntmIzadji);
 		frmPocetniProzorSestra.setVisible(true);
-
+		
+		var mainMenu = new MedicinskaSestraMenuTab();
+		mainMenu.btnOdjaviSe.addActionListener(this::odjava);
+		mainMenu.btnIzadji.addActionListener(this::izlaz);
+		mainMenu.btnPrikaziSveRacune.addActionListener(this::pregledajSveRacune);
+		mainMenu.btnSviPregledi.addActionListener(this::pregledajSvePreglede);
+		mainMenu.btnZakaziZatrazenPregled.addActionListener(this::zakaziVecZatrazenPregled);
+		mainMenu.btnZakaziNoviPregled.addActionListener(this::zakaziPregled);
+		tabbedPane.add(mainMenu, "Glavni Meni");
+		
 		GreetingPanel gp = new GreetingPanel(controller.Router.trenutniKorisnik);
 		var tpc = new TabbedPaneCloser(gp, "Dobrodosli");
 		tabbedPane.addTab("Dobrodosli", tpc);
+		tabbedPane.setSelectedIndex(1);
 
 	}
+	
+	public void zakaziPregled(ActionEvent e) {
+		tabbedPane.add("Zakazi Pregled", new TabbedPaneCloser(new ZakaziPregled(), "Zakazi Pregled"));
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazi Pregled"));
+	}
+	
+	public void zakaziVecZatrazenPregled(ActionEvent e) {
+		tabbedPane.add("Zakazi Zatrazen Pregled", new TabbedPaneCloser(new ZakaziVecZatrazen(), "Zakazi Zatrazen Pregled"));
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazi Zatrazen Pregled"));
+	}
+	public void pregledajSvePreglede(ActionEvent e) {
+		tabbedPane.add("Pregledaj Preglede",
+				new TabbedPaneCloser(new PregledajSvePreglede(), "Pregledaj Preglede"));
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Pregledaj Preglede"));
+	}
+	
+	public void pregledajSveRacune(ActionEvent e) {
+			tabbedPane.add("Prikazi Racun", new TabbedPaneCloser(new PrikaziRacun(), "Prikazi Racun"));
+			tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Prikazi Racun"));
+		}
+	public void odjava(ActionEvent e) {
+		if(JOptionPane.showConfirmDialog(null, "Jeste Li sigurni da zelite da se odjavite?") == JOptionPane.YES_OPTION) {
+		frmPocetniProzorSestra.dispose();
+		Router.trenutniKorisnik = null;
+		Router.userRoute();}
+	}
+	public void izlaz(ActionEvent e) {
+		switch (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite izaci", "Izlaz",
+				JOptionPane.YES_NO_OPTION)) {
+		case JOptionPane.YES_OPTION:
+			System.exit(0);
+		default:
+			break;
+		}
+	}
+	
 }

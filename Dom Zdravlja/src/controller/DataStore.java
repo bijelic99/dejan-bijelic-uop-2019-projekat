@@ -231,12 +231,17 @@ public class DataStore {
 	public static void dodajPacijenta(Pacijent p, ZdravstvenaKnjizica zdravstvenaKnjizica) {
 		p.setId(generateId(pacijenti));
 
-		zdravstvenaKnjizica.setIdKorisnika(p.getId());
-		zdravstvenaKnjizica.setId(generateId(zdravstveneKnjizice));
-		p.setZdravstvenaKnjizicaId(zdravstvenaKnjizica.getId());
 		try {
+			zdravstvenaKnjizica.setIdKorisnika(p.getId());
+			if (!(zdravstveneKnjizice.containsKey(zdravstvenaKnjizica.getId()))) {
+				zdravstvenaKnjizica.setId(generateId(zdravstveneKnjizice));
+				dodaj(zdravstvenaKnjizica);
+			} else {
+
+				izmeni(zdravstvenaKnjizica);
+			}
+			p.setZdravstvenaKnjizicaId(zdravstvenaKnjizica.getId());
 			dodaj(p);
-			dodaj(zdravstvenaKnjizica);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -247,44 +252,76 @@ public class DataStore {
 	public static boolean proveriIspravnostIDostupnostTermina(String termin, Lekar lekar) {
 		try {
 			var vremePocetka = LocalDateTime.parse(termin, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
-			if(vremePocetka.isAfter(LocalDateTime.now()) || vremePocetka.equals(LocalDateTime.now())) {
-			var vremeKraja = vremePocetka.plusMinutes(15);
-			if (pregledi.values().stream().filter(i -> ((Pregled) i).getLekarId() == lekar.getId())
-					.map(i -> (Pregled) i).filter(p -> {
-						return !((vremeKraja.isBefore(p.getTermin().getVremePocetka())
-								|| vremeKraja.isEqual(p.getTermin().getVremePocetka()))
-								|| (vremePocetka.isAfter(p.getTermin().getVremeKraja())
-										|| vremePocetka.isEqual(p.getTermin().getVremeKraja())));
-					}).count() != 0)
-				return false;}
-			else return false;
+			if (vremePocetka.isAfter(LocalDateTime.now()) || vremePocetka.equals(LocalDateTime.now())) {
+				var vremeKraja = vremePocetka.plusMinutes(15);
+				if (pregledi.values().stream().filter(i -> ((Pregled) i).getLekarId() == lekar.getId())
+						.map(i -> (Pregled) i).filter(p -> {
+							return !((vremeKraja.isBefore(p.getTermin().getVremePocetka())
+									|| vremeKraja.isEqual(p.getTermin().getVremePocetka()))
+									|| (vremePocetka.isAfter(p.getTermin().getVremeKraja())
+											|| vremePocetka.isEqual(p.getTermin().getVremeKraja())));
+						}).count() != 0)
+					return false;
+			} else
+				return false;
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
+
 	public static boolean proveriIspravnostIDostupnostTermina(String termin, int lekarId) {
 		try {
 			var vremePocetka = LocalDateTime.parse(termin, DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
-			if(vremePocetka.isAfter(LocalDateTime.now()) || vremePocetka.equals(LocalDateTime.now())) {
-			var vremeKraja = vremePocetka.plusMinutes(15);
-			if (pregledi.values().stream().filter(i -> ((Pregled) i).getLekarId() == lekarId)
-					.map(i -> (Pregled) i).filter(p -> {
-						return !((vremeKraja.isBefore(p.getTermin().getVremePocetka())
-								|| vremeKraja.isEqual(p.getTermin().getVremePocetka()))
-								|| (vremePocetka.isAfter(p.getTermin().getVremeKraja())
-										|| vremePocetka.isEqual(p.getTermin().getVremeKraja())));
-					}).count() != 0)
-				return false;}
-			else return false;
+			if (vremePocetka.isAfter(LocalDateTime.now()) || vremePocetka.equals(LocalDateTime.now())) {
+				var vremeKraja = vremePocetka.plusMinutes(15);
+				if (pregledi.values().stream().filter(i -> ((Pregled) i).getLekarId() == lekarId).map(i -> (Pregled) i)
+						.filter(p -> {
+							return !((vremeKraja.isBefore(p.getTermin().getVremePocetka())
+									|| vremeKraja.isEqual(p.getTermin().getVremePocetka()))
+									|| (vremePocetka.isAfter(p.getTermin().getVremeKraja())
+											|| vremePocetka.isEqual(p.getTermin().getVremeKraja())));
+						}).count() != 0)
+					return false;
+			} else
+				return false;
 		} catch (Exception e) {
 			return false;
 		}
 		return true;
 	}
+
 	public static Racun napraviRacun(Pregled p) {
-		
+
 		return null;
+	}
+
+	public static void dodajNovuZdravstvenuKnjizicu(ZdravstvenaKnjizica zdravstvenaKnjizica) throws Exception {
+		zdravstvenaKnjizica.setId(generateId(zdravstveneKnjizice));
+		pacijenti.values().stream().map(i -> (Pacijent) i)
+				.filter(p -> p.getId() == zdravstvenaKnjizica.getIdKorisnika()).forEach(p -> {
+					p.setZdravstvenaKnjizicaId(zdravstvenaKnjizica.getId());
+					try {
+						izmeni(p);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
+		zdravstveneKnjizice.values().stream().map(i -> (ZdravstvenaKnjizica) i)
+				.filter(zk -> zk.getId() != zdravstvenaKnjizica.getId()
+						&& zk.getIdKorisnika() == zdravstvenaKnjizica.getIdKorisnika())
+				.forEach(zk -> {
+					zk.setIdKorisnika(-5);
+					try {
+						izmeni(zk);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
+		dodaj(zdravstvenaKnjizica);
+
 	}
 
 }

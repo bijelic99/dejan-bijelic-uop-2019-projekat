@@ -17,7 +17,7 @@ public class PacijentMenuTab extends JPanel {
 	 * Create the panel.
 	 */
 	public PacijentMenuTab() {
-		setLayout(new MigLayout("fill", "[][][][]", "[]"));
+		setLayout(new MigLayout("fill", "[25%][25%][25%][25%]", "[]"));
 		
 		btnZakazi = new JButton("Zakazi");
 		btnZakazi.setHorizontalTextPosition(SwingConstants.CENTER);
