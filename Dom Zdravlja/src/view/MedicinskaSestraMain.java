@@ -349,19 +349,21 @@ public class MedicinskaSestraMain {
 		mnOther.add(mntmIzadji);
 		frmPocetniProzorSestra.setVisible(true);
 		
+		
+		
 		var mainMenu = new MedicinskaSestraMenuTab();
+		tabbedPane.addTab("Main Menu", null, mainMenu, null);
 		mainMenu.btnOdjaviSe.addActionListener(this::odjava);
 		mainMenu.btnIzadji.addActionListener(this::izlaz);
 		mainMenu.btnPrikaziSveRacune.addActionListener(this::pregledajSveRacune);
 		mainMenu.btnSviPregledi.addActionListener(this::pregledajSvePreglede);
 		mainMenu.btnZakaziZatrazenPregled.addActionListener(this::zakaziVecZatrazenPregled);
 		mainMenu.btnZakaziNoviPregled.addActionListener(this::zakaziPregled);
-		tabbedPane.add(mainMenu, "Glavni Meni");
 		
 		GreetingPanel gp = new GreetingPanel(controller.Router.trenutniKorisnik);
 		var tpc = new TabbedPaneCloser(gp, "Dobrodosli");
 		tabbedPane.addTab("Dobrodosli", tpc);
-		tabbedPane.setSelectedIndex(1);
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dobrodosli"));
 
 	}
 	
@@ -385,7 +387,8 @@ public class MedicinskaSestraMain {
 			tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Prikazi Racun"));
 		}
 	public void odjava(ActionEvent e) {
-		if(JOptionPane.showConfirmDialog(null, "Jeste Li sigurni da zelite da se odjavite?") == JOptionPane.YES_OPTION) {
+		if(JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite da se odjavite?", "Odjava",
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
 		frmPocetniProzorSestra.dispose();
 		Router.trenutniKorisnik = null;
 		Router.userRoute();}

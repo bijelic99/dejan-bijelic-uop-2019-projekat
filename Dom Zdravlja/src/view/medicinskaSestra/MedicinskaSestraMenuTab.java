@@ -3,6 +3,10 @@ package view.medicinskaSestra;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
+
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 
@@ -20,6 +24,10 @@ public class MedicinskaSestraMenuTab extends JPanel {
 	 */
 	public MedicinskaSestraMenuTab() {
 		setLayout(new MigLayout("fill", "[33%][][33%]", "[16%][16%][16%][16%][16%][16%]"));
+		
+		var screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		var minPanelSize = new Dimension(screenSize.width/5, screenSize.height/5);
+		this.setMinimumSize(minPanelSize);
 		
 		btnZakaziNoviPregled = new JButton("Zakazi Novi Pregled");
 		btnZakaziNoviPregled.setHorizontalTextPosition(SwingConstants.CENTER);

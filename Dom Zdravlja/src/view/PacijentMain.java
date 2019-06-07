@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.JFrame;
@@ -87,27 +86,11 @@ public class PacijentMain {
 		menuBar.add(mnOther);
 
 		JMenuItem mntmOdjaviSe = new JMenuItem("Odjavi Se");
-		mntmOdjaviSe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmPacijent.dispose();
-				Router.trenutniKorisnik = null;
-				Router.userRoute();
-			}
-		});
+		mntmOdjaviSe.addActionListener(this::odjava);
 		mnOther.add(mntmOdjaviSe);
 
 		JMenuItem mntmIzadji = new JMenuItem("Izadji");
-		mntmIzadji.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				switch (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite izaci", "Izlaz",
-						JOptionPane.YES_NO_OPTION)) {
-				case JOptionPane.YES_OPTION:
-					System.exit(0);
-				default:
-					break;
-				}
-			}
-		});
+		mntmIzadji.addActionListener(this::izlaz);
 		mnOther.add(mntmIzadji);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -117,9 +100,13 @@ public class PacijentMain {
 		GreetingPanel gp = new GreetingPanel(controller.Router.trenutniKorisnik);
 		var tpc = new TabbedPaneCloser(gp, "Dobrodosli");
 		tabbedPane.addTab("Dobrodosli", tpc);
+		
+		
 
 		pmt = new PacijentMenuTab();
-		tabbedPane.addTab("Glavni Meni", pmt);
+		tabbedPane.addTab("Main Menu", null, pmt, null);
+		pmt.btnIzadji.addActionListener(this::izlaz);
+		pmt.btnOdjaviSe.addActionListener(this::odjava);
 
 		dodajAkcije();
 	}
@@ -130,14 +117,12 @@ public class PacijentMain {
 
 		mntmOtkazi.addActionListener(this::otkaziProzor);
 		pmt.btnOtkazi.addActionListener(this::otkaziProzor);
-		
+
 		mntmPregledajSve.addActionListener(this::pregledajProzor);
 		pmt.btnPregledajSve.addActionListener(this::pregledajProzor);
-		
+
 		mntmPregledajGotove.addActionListener(this::pregledajZakazaneProzor);
 		pmt.btnPregledajGotove.addActionListener(this::pregledajZakazaneProzor);
-		
-		
 
 	}
 
@@ -173,19 +158,19 @@ public class PacijentMain {
 		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Vidi zakazane preglede"));
 	}
 
-	protected JMenuItem getMntmPregledajGotove() {
-		return mntmPregledajGotove;
+	public void odjava(ActionEvent e) {
+		frmPacijent.dispose();
+		Router.trenutniKorisnik = null;
+		Router.userRoute();
 	}
 
-	public JMenuItem getMntmPregledajSve() {
-		return mntmPregledajSve;
-	}
-
-	public JMenuItem getMntmZakazi() {
-		return mntmZakazi;
-	}
-
-	public JMenuItem getMntmOtkazi() {
-		return mntmOtkazi;
+	public void izlaz(ActionEvent e) {
+		switch (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite izaci", "Izlaz",
+				JOptionPane.YES_NO_OPTION)) {
+		case JOptionPane.YES_OPTION:
+			System.exit(0);
+		default:
+			break;
+		}
 	}
 }
