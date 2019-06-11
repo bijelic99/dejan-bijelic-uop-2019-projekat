@@ -16,6 +16,7 @@ public class LekarMenuTab extends JPanel {
 	public JButton btnOtkaziPregled;
 	public JButton btnIzadji;
 	public JButton btnPregledajPacijenta;
+	private JButton btnPregledajSve;
 
 	/**
 	 * Create the panel.
@@ -37,7 +38,9 @@ public class LekarMenuTab extends JPanel {
 		btnPregledajZakazane.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnPregledajZakazane.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnPregledajZakazane.setIcon(new ImageIcon(LekarMenuTab.class.getResource("/view/icons/baseline_pageview_black_18dp.png")));
-		add(btnPregledajZakazane, "cell 1 0 1 2, grow");
+		add(btnPregledajZakazane, "cell 1 0 1 1, grow");
+		
+
 		
 		btnOtkaziPregled = new JButton("Otkazi Pregled");
 		btnOtkaziPregled.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -50,6 +53,13 @@ public class LekarMenuTab extends JPanel {
 		btnOdjaviSe.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnOdjaviSe.setIcon(new ImageIcon(LekarMenuTab.class.getResource("/view/icons/sharp_face_black_18dp.png")));
 		add(btnOdjaviSe, "cell 2 0, grow");
+		
+		btnPregledajSve = new JButton("Pregledaj Sve");
+		btnPregledajSve.setIcon(new ImageIcon(LekarMenuTab.class.getResource("/view/icons/baseline_view_list_black_18dp.png")));
+		btnPregledajSve.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btnPregledajSve.setHorizontalTextPosition(SwingConstants.CENTER);
+		add(btnPregledajSve, "cell 1 1, grow");
+		
 		
 		btnIzadji = new JButton("Izadji");
 		btnIzadji.setVerticalTextPosition(SwingConstants.BOTTOM);

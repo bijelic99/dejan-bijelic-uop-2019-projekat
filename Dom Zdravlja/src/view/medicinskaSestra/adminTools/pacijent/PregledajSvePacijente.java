@@ -32,7 +32,7 @@ public class PregledajSvePacijente extends JPanel {
 		
 		mapaPacijenata = DataStore.pacijenti;
 		table = new JTable(ucitajTabelu());
-
+		table.setDefaultEditor(Object.class, null);
 
 
 		add(new JScrollPane(table), BorderLayout.CENTER);

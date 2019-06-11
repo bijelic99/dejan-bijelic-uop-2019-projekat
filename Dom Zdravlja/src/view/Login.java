@@ -70,6 +70,7 @@ public class Login {
 			}
 		});
 		frmLoginWindow.getContentPane().add(btnLogin, BorderLayout.SOUTH);
+		frmLoginWindow.getRootPane().setDefaultButton(btnLogin);
 		
 		JPanel panel_3 = new JPanel();
 		frmLoginWindow.getContentPane().add(panel_3, BorderLayout.CENTER);
@@ -124,6 +125,8 @@ public class Login {
 		FlowLayout flowLayout_3 = (FlowLayout) panel_7.getLayout();
 		flowLayout_3.setHgap(15);
 		panel_3.add(panel_7, BorderLayout.EAST);
+		
+		
 	}
 
 }

@@ -27,6 +27,7 @@ public class PregledajSveZdravstveneKnjizice extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		table = new JTable(ucitajTabelu());
+		table.setDefaultEditor(Object.class, null);
 		
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {

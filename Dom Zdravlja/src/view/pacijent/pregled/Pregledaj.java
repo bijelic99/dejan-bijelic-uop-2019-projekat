@@ -47,6 +47,7 @@ public class Pregledaj extends JPanel {
 		setLayout(new BorderLayout(0, 0));
 		
 		jt = new JTable();
+		jt.setDefaultEditor(Object.class, null);
 		JScrollPane scrollPane = new JScrollPane(jt);
 		add(scrollPane, BorderLayout.CENTER);
 		
