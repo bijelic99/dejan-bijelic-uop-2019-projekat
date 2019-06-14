@@ -16,7 +16,7 @@ public class LekarMenuTab extends JPanel {
 	public JButton btnOtkaziPregled;
 	public JButton btnIzadji;
 	public JButton btnPregledajPacijenta;
-	private JButton btnPregledajSve;
+	public JButton btnPregledajSve;
 
 	/**
 	 * Create the panel.

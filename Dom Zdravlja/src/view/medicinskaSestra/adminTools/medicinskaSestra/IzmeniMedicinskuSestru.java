@@ -143,7 +143,7 @@ public class IzmeniMedicinskuSestru extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				var dz = (DomZdravlja) (comboBox_1.getSelectedItem());
 				try {
-					comboBox_2.setModel(new DefaultComboBoxModel<Sluzba>(dz.getSluzbe().stream().filter(s->s.isDozvoljenoLekaru()).toArray(Sluzba[]::new)));
+					comboBox_2.setModel(new DefaultComboBoxModel<Sluzba>(dz.getSluzbe().toArray(Sluzba[]::new)));
 				} catch (Exception e2) {
 
 				}
@@ -191,6 +191,7 @@ public class IzmeniMedicinskuSestru extends JPanel {
 			
 			DataStore.izmeni(menjaSe);
 			JOptionPane.showMessageDialog(null, "Uspesna Izmena.");
+			view.Utility.resetForm(this);
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Greska pri izmeni!!!");
@@ -200,6 +201,7 @@ public class IzmeniMedicinskuSestru extends JPanel {
 
 
 	protected void ucitajMedicinskuSestru() {
+		if(comboBox.getSelectedIndex() != -1) {
 		menjaSe = (MedicinskaSestra) (comboBox.getSelectedItem());
 		textField.setText(menjaSe.getIme());
 		textField_1.setText(menjaSe.getPrezime());
@@ -225,7 +227,7 @@ public class IzmeniMedicinskuSestru extends JPanel {
 
 		textField_5.setText(menjaSe.getPlata() + "");
 
-		
+		}
 		
 	}
 

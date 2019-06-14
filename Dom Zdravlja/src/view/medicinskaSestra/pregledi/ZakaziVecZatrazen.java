@@ -114,6 +114,7 @@ public class ZakaziVecZatrazen extends JPanel {
 			pregled.setSobaId(((Soba)comboBox_1.getSelectedItem()).getId());
 			DataStore.izmeni(pregled);
 			JOptionPane.showMessageDialog(null, "Uspesno ste zakazali");
+			view.Utility.resetForm(this);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Greska " + e.getMessage());
 		}

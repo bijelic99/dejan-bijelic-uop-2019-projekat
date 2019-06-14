@@ -64,7 +64,7 @@ public class IzmeniLekara extends JPanel {
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new MigLayout("fillx","[left][left, fill][][][]"));
+		panel_1.setLayout(new MigLayout("fillx", "[left][left, fill][][][]"));
 
 		JLabel label = new JLabel("Ime: ");
 		label.setBounds(10, 14, 108, 14);
@@ -73,7 +73,7 @@ public class IzmeniLekara extends JPanel {
 		textField = new JTextField();
 		textField.setColumns(10);
 		textField.setBounds(128, 11, 300, 20);
-		panel_1.add(textField,"span 4, wrap");
+		panel_1.add(textField, "span 4, wrap");
 
 		JLabel label_1 = new JLabel("Prezime: ");
 		label_1.setBounds(10, 38, 108, 14);
@@ -82,7 +82,7 @@ public class IzmeniLekara extends JPanel {
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		textField_1.setBounds(128, 35, 300, 20);
-		panel_1.add(textField_1,"span 4, wrap");
+		panel_1.add(textField_1, "span 4, wrap");
 
 		JLabel label_2 = new JLabel("JMBG: ");
 		label_2.setBounds(10, 66, 108, 14);
@@ -145,7 +145,8 @@ public class IzmeniLekara extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				var dz = (DomZdravlja) (comboBox_1.getSelectedItem());
 				try {
-					comboBox_2.setModel(new DefaultComboBoxModel<Sluzba>(dz.getSluzbe().stream().filter(s->s.isDozvoljenoLekaru()).toArray(Sluzba[]::new)));
+					comboBox_2.setModel(new DefaultComboBoxModel<Sluzba>(
+							dz.getSluzbe().stream().filter(s -> s.isDozvoljenoLekaru()).toArray(Sluzba[]::new)));
 				} catch (Exception e2) {
 
 				}
@@ -155,11 +156,11 @@ public class IzmeniLekara extends JPanel {
 		comboBox_1.setSelectedIndex(-1);
 		comboBox_1.setBounds(128, 214, 300, 22);
 		panel_1.add(comboBox_1, "span 4, wrap");
-		
+
 		JLabel label_10 = new JLabel("Sluzba: ");
 		label_10.setBounds(10, 247, 108, 14);
 		panel_1.add(label_10);
-		
+
 		comboBox_2 = new JComboBox<Sluzba>();
 		comboBox_2.setSelectedIndex(-1);
 		comboBox_2.setBounds(128, 243, 300, 22);
@@ -168,12 +169,11 @@ public class IzmeniLekara extends JPanel {
 		JLabel label_11 = new JLabel("Specijalizacija: ");
 		label_11.setBounds(10, 279, 108, 14);
 		panel_1.add(label_11);
-		
+
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
 		textField_7.setBounds(128, 276, 300, 20);
 		panel_1.add(textField_7, "span 4, wrap");
-
 
 		JButton btnIzmeni = new JButton("Izmeni");
 		btnIzmeni.addActionListener(new ActionListener() {
@@ -191,28 +191,30 @@ public class IzmeniLekara extends JPanel {
 
 	protected void izmeniLekara() {
 		try {
-			menjaSe.setIme(textField.getText().strip()+"");
-			menjaSe.setPrezime(textField_1.getText().strip()+"");
-			menjaSe.setJmbg(textField_2.getText().strip()+"");
+			menjaSe.setIme(textField.getText().strip() + "");
+			menjaSe.setPrezime(textField_1.getText().strip() + "");
+			menjaSe.setJmbg(textField_2.getText().strip() + "");
 			menjaSe.setPol(radioButton.isSelected());
-			menjaSe.setAdresa(textField_3.getText().strip()+"");
-			menjaSe.setBrojTelefona(textField_4.getText().strip()+"");
-			menjaSe.setPlata(Double.parseDouble(textField_6.getText().strip()+""));
-			menjaSe.setSpecijalizacija(textField_7.getText().strip()+"");
-			menjaSe.setDomZdravljaId(((DomZdravlja)comboBox_1.getSelectedItem()).getId());
-			menjaSe.setSluzba((Sluzba)comboBox_2.getSelectedItem());
-			
+			menjaSe.setAdresa(textField_3.getText().strip() + "");
+			menjaSe.setBrojTelefona(textField_4.getText().strip() + "");
+			menjaSe.setPlata(Double.parseDouble(textField_6.getText().strip() + ""));
+			menjaSe.setSpecijalizacija(textField_7.getText().strip() + "");
+			menjaSe.setDomZdravljaId(((DomZdravlja) comboBox_1.getSelectedItem()).getId());
+			menjaSe.setSluzba((Sluzba) comboBox_2.getSelectedItem());
+
 			DataStore.izmeni(menjaSe);
 			JOptionPane.showMessageDialog(null, "Uspesna Izmena.");
-			
+			view.Utility.resetForm(this);
+
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Greska pri izmeni!!!");
 		}
 		
-		
+
 	}
 
 	protected void ucitajLekara() {
+		try {
 		menjaSe = (Lekar) (comboBox.getSelectedItem());
 		textField.setText(menjaSe.getIme());
 		textField_1.setText(menjaSe.getPrezime());
@@ -239,7 +241,8 @@ public class IzmeniLekara extends JPanel {
 		textField_6.setText(menjaSe.getPlata() + "");
 
 		textField_7.setText(menjaSe.getSpecijalizacija());
-
+		}
+		catch(Exception e) {}
 	}
 
 }

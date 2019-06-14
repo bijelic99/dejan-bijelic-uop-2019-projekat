@@ -166,6 +166,7 @@ public class ZakaziPregled extends JPanel {
 			try {
 				DataStore.dodaj(pregled);
 				JOptionPane.showMessageDialog(null, "Uspesno ste dodali");
+				view.Utility.resetForm(this);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Greska pri dodavanju");
 			}

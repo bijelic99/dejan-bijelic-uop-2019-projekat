@@ -211,6 +211,7 @@ public class DodajPacijenta extends JPanel {
 					
 					DataStore.dodajPacijenta(p, zk);
 					JOptionPane.showMessageDialog(null, "Uspesno ste dodali Korisnika");
+					view.Utility.resetForm(this);
 				}
 			}
 

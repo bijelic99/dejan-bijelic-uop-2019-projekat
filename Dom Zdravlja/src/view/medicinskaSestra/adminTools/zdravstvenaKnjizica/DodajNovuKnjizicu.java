@@ -77,7 +77,7 @@ public class DodajNovuKnjizicu extends JPanel {
 			
 			DataStore.dodajNovuZdravstvenuKnjizicu(zdravstvenaKnjizica);
 			JOptionPane.showMessageDialog(null, "Uspesno ste dodali");
-			
+			view.Utility.resetForm(this);
 			
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Nije dobar format datuma");

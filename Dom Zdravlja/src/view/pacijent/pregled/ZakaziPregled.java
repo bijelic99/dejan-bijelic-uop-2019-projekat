@@ -79,6 +79,7 @@ public class ZakaziPregled extends JPanel {
 			try {
 				DataStore.dodaj(p);
 				JOptionPane.showMessageDialog(null, "Uspesno zakazivanje");
+				view.Utility.resetForm(this);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(null, "Greska pri Zakazivanju!!!");

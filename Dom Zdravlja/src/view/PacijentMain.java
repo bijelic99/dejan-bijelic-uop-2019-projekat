@@ -15,6 +15,7 @@ import javax.swing.JTabbedPane;
 
 import controller.Router;
 import view.pacijent.PacijentMenuTab;
+import view.pacijent.pregled.IzmeniZakazanPregled;
 import view.pacijent.pregled.OtkaziPregled;
 import view.pacijent.pregled.Pregledaj;
 import view.pacijent.pregled.ZakaziPregled;
@@ -69,14 +70,18 @@ public class PacijentMain {
 
 		mntmZakazi = new JMenuItem("Zakazi");
 		mnPregledi.add(mntmZakazi);
+		
+		JMenuItem mntmIzmeniZakazanPregled = new JMenuItem("Izmeni zakazan pregled");
+		mntmIzmeniZakazanPregled.addActionListener(this::IzmeniZakazaneProzor);
+		mnPregledi.add(mntmIzmeniZakazanPregled);
 
 		mntmOtkazi = new JMenuItem("Otkazi");
 		mnPregledi.add(mntmOtkazi);
 
-		mntmPregledajSve = new JMenuItem("Pregledaj Sve");
+		mntmPregledajSve = new JMenuItem("Pregledaj sve");
 		mnPregledi.add(mntmPregledajSve);
 
-		mntmPregledajGotove = new JMenuItem("Pregledaj Zakazane");
+		mntmPregledajGotove = new JMenuItem("Pregledaj zakazane");
 		mnPregledi.add(mntmPregledajGotove);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
@@ -104,6 +109,7 @@ public class PacijentMain {
 		
 
 		pmt = new PacijentMenuTab();
+		pmt.btnIzmeni.addActionListener(this::IzmeniZakazaneProzor);
 		tabbedPane.addTab("Main Menu", null, pmt, null);
 		pmt.btnIzadji.addActionListener(this::izlaz);
 		pmt.btnOdjaviSe.addActionListener(this::odjava);
@@ -172,5 +178,12 @@ public class PacijentMain {
 		default:
 			break;
 		}
+	}
+	
+	private void IzmeniZakazaneProzor(ActionEvent e) {
+		
+		var tpc = new TabbedPaneCloser(new IzmeniZakazanPregled(), "Izmeni zakazane preglede");
+		tabbedPane.addTab("Izmeni zakazane preglede", tpc);
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Izmeni zakazane preglede"));
 	}
 }

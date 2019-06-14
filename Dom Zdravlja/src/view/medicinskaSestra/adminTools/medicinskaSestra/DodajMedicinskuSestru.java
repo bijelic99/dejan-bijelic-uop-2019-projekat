@@ -200,6 +200,7 @@ public class DodajMedicinskuSestru extends JPanel {
 			l.setSluzba((Sluzba)comboBox_1.getSelectedItem());
 			DataStore.dodaj(l);
 			JOptionPane.showMessageDialog(null, "Uspesno ste dodali novou Medicinsku Sestru");
+			view.Utility.resetForm(this);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Greska pri dodavanju novog korisnika");
 			}

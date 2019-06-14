@@ -123,6 +123,7 @@ public class IzmeniZdravstvenuKnjizicu extends JPanel {
 				DataStore.izmeni(menjaSe);
 				DataStore.izmeni(pacijent);
 				JOptionPane.showMessageDialog(null, "Uspesna Izmena");
+				view.Utility.resetForm(this);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null,
 						"Morate uneti pravilan datum formata dd-mm-yyyy i odabrati kategoriju");
@@ -133,6 +134,7 @@ public class IzmeniZdravstvenuKnjizicu extends JPanel {
 	}
 
 	protected void ucitajKorisnika() {
+		if(comboBox.getSelectedIndex() != -1) {
 		menjaSe = (ZdravstvenaKnjizica) comboBox.getSelectedItem();
 		try {
 			comboBox_2.setSelectedItem((Pacijent) DataStore.pacijenti.values().stream()
@@ -142,7 +144,7 @@ public class IzmeniZdravstvenuKnjizicu extends JPanel {
 		}
 		textField.setText(menjaSe.getDatumIsteka().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
 		comboBox_1.setSelectedItem(menjaSe.getKategorija());
-
+		}
 	}
 
 	protected JComboBox<KategorijaOsiguranja> getComboBox_1() {

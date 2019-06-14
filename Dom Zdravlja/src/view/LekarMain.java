@@ -17,6 +17,7 @@ import controller.Router;
 import view.lekar.LekarMenuTab;
 import view.lekar.zakazaniPregledi.OtkaziPregled;
 import view.lekar.zakazaniPregledi.PregledajPacijenta;
+import view.lekar.zakazaniPregledi.PregledajSvePreglede;
 import view.lekar.zakazaniPregledi.PregledajZakazanePreglede;
 
 public class LekarMain {
@@ -70,9 +71,13 @@ public class LekarMain {
 		mntmOtkazi.addActionListener(this::otkaziPregled);
 		mnZakazaniPregledi.add(mntmOtkazi);
 
-		JMenuItem mntmPregledajZakazane = new JMenuItem("Pregledaj Zakazane");
+		JMenuItem mntmPregledajZakazane = new JMenuItem("Pregledaj zakazane");
 		mntmPregledajZakazane.addActionListener(this::pregledajZakazanePreglede);
 		mnZakazaniPregledi.add(mntmPregledajZakazane);
+		
+		JMenuItem mntmPregledajSve = new JMenuItem("Pregledaj sve preglede");
+		mntmPregledajSve.addActionListener(this::pregledajSvePreglede);
+		mnZakazaniPregledi.add(mntmPregledajSve);
 
 		Component horizontalGlue = Box.createHorizontalGlue();
 		menuBar.add(horizontalGlue);
@@ -98,6 +103,7 @@ public class LekarMain {
 		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Dobrodosli"));
 
 		var mainMenu = new LekarMenuTab();
+		mainMenu.btnPregledajSve.addActionListener(this::pregledajSvePreglede);
 		mainMenu.btnPregledajZakazane.addActionListener(this::pregledajZakazanePreglede);
 		mainMenu.btnOtkaziPregled.addActionListener(this::otkaziPregled);
 		mainMenu.btnPregledajPacijenta.addActionListener(this::pregledajPacijenta);
@@ -142,6 +148,12 @@ public class LekarMain {
 		tabbedPane.add("Zakazani pregledi",
 				new TabbedPaneCloser(new PregledajZakazanePreglede(), "Zakazani pregledi"));
 		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Zakazani pregledi"));
+	}
+	
+	public void pregledajSvePreglede(ActionEvent e) {
+		tabbedPane.add("Svi moji pregledi",
+				new TabbedPaneCloser(new PregledajSvePreglede(), "Svi moji pregledi"));
+		tabbedPane.setSelectedIndex(tabbedPane.indexOfTab("Svi moji pregledi"));
 	}
 	
 	

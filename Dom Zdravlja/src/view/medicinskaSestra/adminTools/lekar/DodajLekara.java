@@ -211,6 +211,7 @@ public class DodajLekara extends JPanel {
 			l.setSluzba((Sluzba)comboBox_1.getSelectedItem());
 			DataStore.dodaj(l);
 			JOptionPane.showMessageDialog(null, "Uspesno ste dodali novog lekara");
+			view.Utility.resetForm(this);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Greska pri dodavanju novog korisnika");
 			}

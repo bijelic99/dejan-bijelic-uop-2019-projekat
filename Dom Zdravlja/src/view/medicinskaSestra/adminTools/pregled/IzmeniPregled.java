@@ -179,6 +179,7 @@ public class IzmeniPregled extends JPanel {
 			try {
 				DataStore.izmeni(menjaSe);
 				JOptionPane.showMessageDialog(null, "Uspesna Izmena");
+				view.Utility.resetForm(this);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Neuspesna Izmena");
 			}
@@ -189,6 +190,7 @@ public class IzmeniPregled extends JPanel {
 	}
 
 	protected void ucitajPregled() {
+		if(comboBox.getSelectedIndex() != -1) {
 		menjaSe = (Pregled) comboBox.getSelectedItem();
 		try {
 			comboBox_1.setSelectedItem(DataStore.pacijenti.values().stream()
@@ -203,38 +205,8 @@ public class IzmeniPregled extends JPanel {
 		} catch (Exception e) {
 
 		}
-
+		}
 	}
 
-	protected JTextArea getTextArea() {
-		return textArea;
-	}
-
-	protected JComboBox<Pacijent> getComboBox_1() {
-		return comboBox_1;
-	}
-
-	protected JButton getButton() {
-		return btnProveri;
-	}
-
-	protected JComboBox<Lekar> getComboBox_2() {
-		return comboBox_2;
-	}
-
-	protected JTextField getTextField() {
-		return textField;
-	}
-
-	protected JComboBox<Soba> getComboBox_3() {
-		return comboBox_3;
-	}
-
-	protected JComboBox<StatusPregleda> getComboBox_4() {
-		return comboBox_4;
-	}
-
-	protected JComboBox<Pregled> getComboBox() {
-		return comboBox;
-	}
+	
 }

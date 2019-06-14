@@ -51,7 +51,7 @@ public class DodajPregled extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if (comboBox.getSelectedIndex() == -1 || comboBox_1.getSelectedIndex() == -1
 						|| comboBox_2.getSelectedIndex() == -1 || comboBox_4.getSelectedIndex() == -1
-						|| textField.getText().strip().isEmpty() || textArea.getText().strip().isEmpty())
+						|| textField.getText().strip().isBlank() || textArea.getText().strip().isEmpty())
 					JOptionPane.showMessageDialog(null, "Morate Sve popuniti");
 				else {
 					if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite dodati pregled", "Dodavanje",
@@ -174,6 +174,7 @@ public class DodajPregled extends JPanel {
 			try {
 				DataStore.dodaj(pregled);
 				JOptionPane.showMessageDialog(null, "Uspesno ste dodali");
+				view.Utility.resetForm(this);
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(null, "Greska pri dodavanju");
 			}

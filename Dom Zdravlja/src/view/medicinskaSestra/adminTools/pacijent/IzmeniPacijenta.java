@@ -167,6 +167,7 @@ public class IzmeniPacijenta extends JPanel {
 		try {
 			DataStore.izmeni(menjaSe);
 			JOptionPane.showMessageDialog(null, "Uspesno ste izmenili");
+			view.Utility.resetForm(this);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Greska pri izmeni "+e.getMessage());
 		}
@@ -174,6 +175,7 @@ public class IzmeniPacijenta extends JPanel {
 	}
 
 	protected void ucitajPacijenta() {
+		if(comboBox.getSelectedIndex() != -1) {
 		menjaSe = ((Pacijent) (comboBox.getSelectedItem()));
 		textField_5.setText(menjaSe.getIme() + "");
 		textField_4.setText(menjaSe.getPrezime() + "");
@@ -190,7 +192,7 @@ public class IzmeniPacijenta extends JPanel {
 		} catch (Exception e) {
 			comboBox_1.setSelectedIndex(-1);
 		}
-
+		}
 	}
 
 }

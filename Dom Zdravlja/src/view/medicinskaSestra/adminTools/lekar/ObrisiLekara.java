@@ -31,19 +31,7 @@ public class ObrisiLekara extends JPanel {
 		JButton btnObrisi = new JButton("Obrisi");
 		btnObrisi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (comboBox.getSelectedIndex() != -1) {
-					if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite da obrisete ?", "Brisanje",
-							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
-						try {
-							DataStore.obrisi(((Identifiable)comboBox.getSelectedItem()));
-							JOptionPane.showMessageDialog(null, "Uspesno Obrisano");
-							comboBox.setSelectedIndex(-1);
-							comboBox.setModel(new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
-							comboBox.setSelectedIndex(-1);
-						} catch (Exception e1) {
-							JOptionPane.showMessageDialog(null, "Greska, nije obrisano!!!");
-						}
-				}
+				obrisi();
 			}
 		});
 		add(btnObrisi, BorderLayout.SOUTH);
@@ -56,6 +44,24 @@ public class ObrisiLekara extends JPanel {
 		comboBox.setSelectedIndex(-1);
 		panel.add(comboBox);
 
+	}
+	
+	private void obrisi() {
+		if (comboBox.getSelectedIndex() != -1) {
+			if (JOptionPane.showConfirmDialog(null, "Jeste li sigurni da zelite da obrisete ?", "Brisanje",
+					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION)
+				try {
+					DataStore.obrisi(((Identifiable)comboBox.getSelectedItem()));
+					JOptionPane.showMessageDialog(null, "Uspesno Obrisano");
+					comboBox.setSelectedIndex(-1);
+					comboBox.setModel(new DefaultComboBoxModel<Lekar>(DataStore.lekari.values().toArray(Lekar[]::new)));
+					comboBox.setSelectedIndex(-1);
+					
+					
+				} catch (Exception e1) {
+					JOptionPane.showMessageDialog(null, "Greska, nije obrisano!!!");
+				}
+		}
 	}
 
 }
