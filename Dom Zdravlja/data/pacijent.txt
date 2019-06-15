@@ -2,3 +2,4 @@
 1|Dragan|Bijelic|NjegovJmbg|true|NekaAdresa|060555333|bijelic03|sifraSifra2|1|1|3
 2|Radoslav|Petrovic|115445454|false|NekaAdresa|06021105445|rasa|rasaradoslav|1|0|2
 3|dsaa|das|dsaad|true|adfsds|dasdas|dad|sda|1|0|5
+4|Ime|Prezme|132132131|false|Adresa|+3816000000|u01|sifra|1|0|6

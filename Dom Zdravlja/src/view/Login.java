@@ -127,6 +127,7 @@ public class Login {
 		panel_3.add(panel_7, BorderLayout.EAST);
 		
 		
+		
 	}
 
 }

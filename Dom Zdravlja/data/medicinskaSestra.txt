@@ -1,4 +1,2 @@
 0|Medicinska|Sestra|JMBG|false|Adresa|+381555666|ms00|sifra|0|32000.0|0|0
 1|Medicinska2|Sestra2|JMBG2|true|Adres2a|+3815556662|ms01|sifra|0|34000.0|1|1
-2|dasasd|asdad|dasad|false|dadas|dasad|adsad|dasd|0|245600.0|3|1
-3|dasdasd|dassdas|dadadasd|false|gjhgfd|fgm|fggf|gfdh|0|1.0|3|1

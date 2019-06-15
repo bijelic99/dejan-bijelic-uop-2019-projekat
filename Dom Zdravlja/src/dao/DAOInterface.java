@@ -155,7 +155,7 @@ public interface DAOInterface {
 			
 			reader.close();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null, e.getMessage()+"Greska");
 			
 		}
 		return null;
